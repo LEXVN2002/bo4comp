@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseSessionForm, type SessionFormValues } from './sessionForm';
+import { parseSessionForm, type SessionFormValues } from './sessionSchema';
 
 function values(overrides: Partial<SessionFormValues> = {}): SessionFormValues {
   return {

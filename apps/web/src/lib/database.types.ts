@@ -263,11 +263,23 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "record_session":
+            "apply_session_camo_progress":
+{ Args: { "p_direction": number,"p_session_id": string }; Returns: undefined
+                           },
+"delete_session":
+{ Args: { "p_session_id": string }; Returns: undefined
+                           },
+"insert_session_weapon_stats":
+{ Args: { "p_session_id": string,"p_weapon_stats": Json }; Returns: undefined
+                           },
+"record_session":
 { Args: { "p_map_id": string,"p_mode"?: string,"p_notes"?: string,"p_played_at"?: string,"p_players"?: number,"p_round_reached": number,"p_weapon_stats"?: Json }; Returns: string
                            },
 "unlock_mastery_camos":
 { Args: { "p_weapon_ids": (string)[] }; Returns: undefined
+                           },
+"update_session":
+{ Args: { "p_map_id": string,"p_mode": string,"p_notes"?: string,"p_played_at"?: string,"p_players": number,"p_round_reached": number,"p_session_id": string,"p_weapon_stats"?: Json }; Returns: undefined
                            }
           }
           Enums: {

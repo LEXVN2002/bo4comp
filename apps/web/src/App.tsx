@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from './features/auth/AuthProvider';
 import { isSupabaseConfigured } from './lib/supabase';
 import Camos from './routes/Camos';
 import Dashboard from './routes/Dashboard';
+import EditSession from './routes/EditSession';
 import EasterEggs from './routes/EasterEggs';
 import Login from './routes/Login';
 import NewSession from './routes/NewSession';
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: '/easter-eggs', element: <EasterEggs /> },
       { path: '/sessions/new', element: <NewSession /> },
       { path: '/sessions', element: <Sessions /> },
+      { path: '/sessions/:sessionId/edit', element: <EditSession /> },
       { path: '*', element: <NotFound /> },
     ],
   },
