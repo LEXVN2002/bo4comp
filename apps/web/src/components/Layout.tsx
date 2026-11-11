@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router';
-import { isSupabaseConfigured } from '../lib/supabase';
+import { useAuth } from '../features/auth/AuthProvider';
 
 const NAV = [
   { to: '/', label: 'Painel', end: true },
@@ -10,11 +10,25 @@ const NAV = [
 ];
 
 export function Layout() {
+  const { session, signOut } = useAuth();
+
   return (
     <div className="min-h-dvh">
-      <header className="sticky top-0 z-10 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
-        <nav className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-3">
-          <span className="mr-3 shrink-0 font-semibold text-emerald-400">BO4 Zombies</span>
+      <header className="sticky top-0 z-30 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 pt-3">
+          <span className="font-semibold text-emerald-400">BO4 Zombies</span>
+          <span className="ml-auto truncate text-xs text-zinc-500" title={session?.user.email}>
+            {session?.user.email}
+          </span>
+          <button
+            type="button"
+            onClick={() => void signOut()}
+            className="shrink-0 text-xs text-zinc-400 hover:text-zinc-100"
+          >
+            Sair
+          </button>
+        </div>
+        <nav className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2">
           {NAV.map((item) => (
             <NavLink
               key={item.to}
@@ -32,12 +46,6 @@ export function Layout() {
         </nav>
       </header>
       <main className="mx-auto max-w-6xl px-4 py-6">
-        {!isSupabaseConfigured && (
-          <p className="mb-6 rounded-md border border-amber-700/60 bg-amber-950/40 p-3 text-sm text-amber-200">
-            Supabase não configurado. Copia <code>apps/web/.env.example</code> para{' '}
-            <code>apps/web/.env.local</code> e preenche os valores.
-          </p>
-        )}
         <Outlet />
       </main>
     </div>

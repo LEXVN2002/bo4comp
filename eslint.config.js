@@ -4,7 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['**/dist/**', '**/node_modules/**', '**/.vite/**', 'supabase/.temp/**', 'coverage/**'] },
+  { ignores: ['**/dist/**', '**/node_modules/**', '**/.vite/**', 'supabase/.temp/**', 'coverage/**', 'apps/web/src/lib/database.types.ts'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
