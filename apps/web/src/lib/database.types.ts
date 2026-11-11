@@ -260,7 +260,21 @@ isOneToOne: false
                 }
           }
           Views: {
-            [_ in never]: never
+            "best_rounds": {
+                  Row: {
+                    "best_round": number | null,"last_played_at": string | null,"map_id": string,"session_count": number | null,"user_id": string
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "sessions_map_id_fkey"
+      columns: ["map_id"]
+isOneToOne: false
+      referencedRelation: "maps"
+      referencedColumns: ["id"]
+    }
+                  ]
+                }
           }
           Functions: {
             "apply_session_camo_progress":

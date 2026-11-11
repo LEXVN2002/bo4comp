@@ -16,6 +16,8 @@ insert into public.weapons (id, name, weapon_class, source) values
   ('w1', 'W1', 'smg', 'base'),
   ('w2', 'W2', 'ar', 'base');
 
+-- Independente do estado da base de dados (tudo é revertido no fim).
+delete from public.weapon_camo_progress;
 delete from public.camos;
 insert into public.camos (id, name, tier, kind, requirement_type, requirement_value, requirement_text, verified) values
   ('c-kills', 'Kills 10',    1, 'zombies', 'kills',     10,   'teste', true),
