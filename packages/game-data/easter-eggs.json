@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ix-main",
+    "map_id": "ix",
+    "name": "IX — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "steps": []
+  },
+  {
+    "id": "voyage-of-despair-main",
+    "map_id": "voyage-of-despair",
+    "name": "Voyage of Despair — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "steps": []
+  },
+  {
+    "id": "blood-of-the-dead-main",
+    "map_id": "blood-of-the-dead",
+    "name": "Blood of the Dead — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "steps": []
+  },
+  {
+    "id": "dead-of-the-night-main",
+    "map_id": "dead-of-the-night",
+    "name": "Dead of the Night — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "steps": []
+  },
+  {
+    "id": "ancient-evil-main",
+    "map_id": "ancient-evil",
+    "name": "Ancient Evil — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "steps": []
+  },
+  {
+    "id": "alpha-omega-main",
+    "map_id": "alpha-omega",
+    "name": "Alpha Omega — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "steps": []
+  },
+  {
+    "id": "tag-der-toten-main",
+    "map_id": "tag-der-toten",
+    "name": "Tag der Toten — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "steps": []
+  }
+]

@@ -1,0 +1,10 @@
+[
+  { "id": "ix", "name": "IX", "storyline": "chaos", "release_order": 1, "is_dlc": false },
+  { "id": "voyage-of-despair", "name": "Voyage of Despair", "storyline": "chaos", "release_order": 2, "is_dlc": false },
+  { "id": "blood-of-the-dead", "name": "Blood of the Dead", "storyline": "aether", "release_order": 3, "is_dlc": false },
+  { "id": "classified", "name": "Classified", "storyline": "aether", "release_order": 4, "is_dlc": false },
+  { "id": "dead-of-the-night", "name": "Dead of the Night", "storyline": "chaos", "release_order": 5, "is_dlc": true },
+  { "id": "ancient-evil", "name": "Ancient Evil", "storyline": "chaos", "release_order": 6, "is_dlc": true },
+  { "id": "alpha-omega", "name": "Alpha Omega", "storyline": "aether", "release_order": 7, "is_dlc": true },
+  { "id": "tag-der-toten", "name": "Tag der Toten", "storyline": "aether", "release_order": 8, "is_dlc": true }
+]

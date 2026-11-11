@@ -1,0 +1,35 @@
+[
+  { "id": "mx9", "name": "MX9", "weapon_class": "smg", "source": "base" },
+  { "id": "saug-9mm", "name": "Saug 9mm", "weapon_class": "smg", "source": "base" },
+  { "id": "spitfire", "name": "Spitfire", "weapon_class": "smg", "source": "base" },
+  { "id": "cordite", "name": "Cordite", "weapon_class": "smg", "source": "base" },
+  { "id": "gks", "name": "GKS", "weapon_class": "smg", "source": "base" },
+
+  { "id": "icr-7", "name": "ICR-7", "weapon_class": "ar", "source": "base" },
+  { "id": "kn-57", "name": "KN-57", "weapon_class": "ar", "source": "base" },
+  { "id": "maddox-rfb", "name": "Maddox RFB", "weapon_class": "ar", "source": "base" },
+  { "id": "rampart-17", "name": "Rampart 17", "weapon_class": "ar", "source": "base" },
+  { "id": "vapr-xkg", "name": "Vapr-XKG", "weapon_class": "ar", "source": "base" },
+
+  { "id": "abr-223", "name": "ABR 223", "weapon_class": "tactical", "source": "base" },
+  { "id": "auger-dmr", "name": "Auger DMR", "weapon_class": "tactical", "source": "base" },
+  { "id": "swordfish", "name": "Swordfish", "weapon_class": "tactical", "source": "base" },
+
+  { "id": "titan", "name": "Titan", "weapon_class": "lmg", "source": "base" },
+  { "id": "vkm-750", "name": "VKM 750", "weapon_class": "lmg", "source": "base" },
+  { "id": "hades", "name": "Hades", "weapon_class": "lmg", "source": "base" },
+
+  { "id": "paladin-hb50", "name": "Paladin HB50", "weapon_class": "sniper", "source": "base" },
+  { "id": "outlaw", "name": "Outlaw", "weapon_class": "sniper", "source": "base" },
+  { "id": "sdm", "name": "SDM", "weapon_class": "sniper", "source": "base" },
+  { "id": "koshka", "name": "Koshka", "weapon_class": "sniper", "source": "base" },
+
+  { "id": "rk-7-garrison", "name": "RK 7 Garrison", "weapon_class": "pistol", "source": "base" },
+  { "id": "mozu", "name": "Mozu", "weapon_class": "pistol", "source": "base" },
+  { "id": "strife", "name": "Strife", "weapon_class": "pistol", "source": "base" },
+
+  { "id": "mog-12", "name": "MOG 12", "weapon_class": "shotgun", "source": "base" },
+  { "id": "sg12", "name": "SG12", "weapon_class": "shotgun", "source": "base" },
+
+  { "id": "hellion-salvo", "name": "Hellion Salvo", "weapon_class": "launcher", "source": "base" }
+]
