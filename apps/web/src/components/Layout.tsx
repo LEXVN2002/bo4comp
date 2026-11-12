@@ -7,6 +7,7 @@ const NAV = [
   { to: '/', label: 'Painel', end: true },
   { to: '/grind', label: 'Grind', end: true },
   { to: '/camos', label: 'Camos', end: false },
+  { to: '/objetivos', label: 'Objetivos', end: true },
   { to: '/easter-eggs', label: 'Easter eggs', end: false },
   { to: '/sessions/new', label: 'Registar sessão', end: true },
   { to: '/sessions', label: 'Histórico', end: true },

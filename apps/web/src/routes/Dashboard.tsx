@@ -7,6 +7,7 @@ import { ClosestToUnlock } from '../features/camos/ClosestToUnlock';
 import { PinnedWeapons } from '../features/camos/PinnedWeapons';
 import { useCamoProgress } from '../features/camos/queries';
 import { useCamoData } from '../features/camos/useCamoData';
+import { GoalsSummary } from '../features/goals/GoalsSummary';
 import { globalCardInput, ShareButton } from '../features/share/ShareCard';
 import { useCatalog } from '../features/catalog/queries';
 import { useBestRounds, useRecentSessions } from '../features/dashboard/queries';
@@ -91,6 +92,8 @@ export default function Dashboard() {
           </h2>
           <ClosestToUnlock data={camoData.data} />
         </section>
+
+        <GoalsSummary />
 
         {camoData.data.pinned.length > 0 && (
           <section aria-labelledby="pinned" className="space-y-2">
