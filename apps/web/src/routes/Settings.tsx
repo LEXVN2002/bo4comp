@@ -7,6 +7,8 @@ import { backupFileName, parseBackup, type Backup, type BackupSummary, type Cata
 import { describeError } from '../lib/errors';
 import { formatDateTime } from '../lib/format';
 import { getSupabase } from '../lib/supabase';
+import { useSaveUserSettings, useUserSettings } from '../features/grind/queries';
+import { useUnlockAnimations } from '../features/unlocks/UnlockAnimations';
 
 type ImportState =
   | { kind: 'idle' }
@@ -88,6 +90,8 @@ export default function Settings() {
   return (
     <section className="mx-auto max-w-2xl space-y-6">
       <h1 className="text-2xl font-semibold tracking-tight">Definições</h1>
+
+      <SoundSettings />
 
       <section className="card space-y-3 p-4" aria-labelledby="export-title">
         <h2 id="export-title" className="font-semibold">
@@ -201,5 +205,65 @@ function SummaryList({ summary }: { summary: BackupSummary }) {
       {summary.notes > 0 && <li>{summary.notes} notas</li>}
       {summary.goals > 0 && <li>{summary.goals} objetivos</li>}
     </ul>
+  );
+}
+
+function SoundSettings() {
+  const settings = useUserSettings();
+  const save = useSaveUserSettings();
+  const { enqueue } = useUnlockAnimations();
+  const current = settings.data;
+
+  return (
+    <section className="card space-y-3 p-4" aria-labelledby="sound-title">
+      <h2 id="sound-title" className="font-semibold">
+        Desbloqueios
+      </h2>
+      <p className="text-sm text-zinc-400">
+        Animação quando desbloqueias um camo. O som usa o ficheiro <code>public/sounds/unlock.mp3</code>; se não
+        existir, a animação corre sem som.
+      </p>
+      {!current ? (
+        <p className="text-sm text-zinc-500">A carregar…</p>
+      ) : (
+        <div className="space-y-3">
+          <label className="flex cursor-pointer items-center gap-3 text-sm">
+            <input
+              type="checkbox"
+              checked={current.sound_enabled}
+              onChange={(e) => save.mutate({ ...current, sound_enabled: e.target.checked })}
+              className="size-4 accent-emerald-500"
+            />
+            Som ligado
+          </label>
+          <label className="flex items-center gap-3 text-sm text-zinc-300">
+            Volume
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.05}
+              value={current.sound_volume}
+              disabled={!current.sound_enabled}
+              onChange={(e) => save.mutate({ ...current, sound_volume: Number(e.target.value) })}
+              className="flex-1 accent-emerald-500"
+            />
+            <span className="w-10 text-right tabular-nums">{Math.round(current.sound_volume * 100)}%</span>
+          </label>
+          {save.isError && (
+            <p role="alert" className="text-sm text-red-400">
+              Não foi possível guardar: {describeError(save.error)}
+            </p>
+          )}
+          <button
+            type="button"
+            onClick={() => enqueue([{ camoId: 'dark-matter', title: 'Dark Matter', subtitle: 'Pré-visualização' }])}
+            className="btn-secondary"
+          >
+            Testar animação
+          </button>
+        </div>
+      )}
+    </section>
   );
 }

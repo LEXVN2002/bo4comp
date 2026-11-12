@@ -1,8 +1,10 @@
 import { Link, NavLink, Outlet } from 'react-router';
 import { useAuth } from '../features/auth/AuthProvider';
+import { UnlockAnimationsProvider } from '../features/unlocks/UnlockAnimations';
 
 const NAV = [
   { to: '/', label: 'Painel', end: true },
+  { to: '/grind', label: 'Grind', end: true },
   { to: '/camos', label: 'Camos', end: false },
   { to: '/easter-eggs', label: 'Easter eggs', end: false },
   { to: '/sessions/new', label: 'Registar sessão', end: true },
@@ -49,7 +51,9 @@ export function Layout() {
         </nav>
       </header>
       <main className="mx-auto max-w-6xl px-4 py-6">
-        <Outlet />
+        <UnlockAnimationsProvider>
+          <Outlet />
+        </UnlockAnimationsProvider>
       </main>
     </div>
   );

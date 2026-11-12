@@ -7,6 +7,7 @@ import Camos from './routes/Camos';
 import Dashboard from './routes/Dashboard';
 import EditSession from './routes/EditSession';
 import EasterEggs from './routes/EasterEggs';
+import Grind from './routes/Grind';
 import Login from './routes/Login';
 import MasterGrid from './routes/MasterGrid';
 import NewSession from './routes/NewSession';
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: '/camos/grelha', element: <MasterGrid /> },
       { path: '/camos/:weaponId', element: <Weapon /> },
       { path: '/easter-eggs', element: <EasterEggs /> },
+      { path: '/grind', element: <Grind /> },
       { path: '/sessions/new', element: <NewSession /> },
       { path: '/sessions', element: <Sessions /> },
       { path: '/sessions/:sessionId/edit', element: <EditSession /> },

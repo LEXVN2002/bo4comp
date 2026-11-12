@@ -8,6 +8,7 @@ import { CamoPanel } from '../features/camos/CamoPanel';
 import { useSaveCamoProgress } from '../features/camos/queries';
 import { moveIndex, SHORTCUT_HELP, shortcutFor } from '../features/camos/shortcuts';
 import { useCamoData, type CamoData } from '../features/camos/useCamoData';
+import { useUnlockAnimations } from '../features/unlocks/UnlockAnimations';
 import {
   useCamoNotes,
   useSaveCamoNote,
@@ -65,7 +66,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
 
   const [selected, setSelected] = useState(0);
   const [panelOpen, setPanelOpen] = useState(false);
-  const [unlockedFlash, setUnlockedFlash] = useState<string | null>(null);
+  const { enqueue } = useUnlockAnimations();
   const helpRef = useRef<HTMLDialogElement>(null);
   const gridRef = useRef<HTMLOListElement>(null);
   const tileRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -85,7 +86,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
       // Atingir o objetivo marca o camo como concluído automaticamente.
       const reached =
         isCountedRequirement(camo.requirement_type) && camo.requirement_value !== null && count >= camo.requirement_value;
-      if (reached && !state.unlocked) setUnlockedFlash(camo.name);
+      if (reached && !state.unlocked) enqueue([{ camoId: camo.id, title: camo.name, subtitle: weapon.name }]);
       pendingCounts.current.set(camo.id, count);
       save.mutate(
         {
@@ -102,7 +103,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
         },
       );
     },
-    [data.index, save, weapon.id],
+    [data.index, enqueue, save, weapon.id, weapon.name],
   );
 
   const changeCountBy = useCallback(
@@ -119,7 +120,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
       if (camoDisplayState(weapon.id, camo, camos, data.index) === 'locked') return;
       const row = data.index.get(progressKey(weapon.id, camo.id));
       const unlocked = row?.unlocked_at == null;
-      if (unlocked) setUnlockedFlash(camo.name);
+      if (unlocked) enqueue([{ camoId: camo.id, title: camo.name, subtitle: weapon.name }]);
       save.mutate({
         weaponId: weapon.id,
         camoId: camo.id,
@@ -128,15 +129,8 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
         previousUnlockedAt: row?.unlocked_at ?? null,
       });
     },
-    [camos, data.index, save, weapon.id],
+    [camos, data.index, enqueue, save, weapon.id, weapon.name],
   );
-
-  // Aviso de desbloqueio (a animação completa chega com o modo grind, etapa 4).
-  useEffect(() => {
-    if (!unlockedFlash) return;
-    const t = setTimeout(() => setUnlockedFlash(null), 2500);
-    return () => clearTimeout(t);
-  }, [unlockedFlash]);
 
   // ---------- Atalhos de teclado ----------
   useEffect(() => {
@@ -354,15 +348,6 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
           saveError={save.error}
           estimate={panelEstimate(selectedCamo)}
         />
-      )}
-
-      {unlockedFlash && (
-        <div
-          role="status"
-          className="fixed top-4 left-1/2 z-50 -translate-x-1/2 rounded-full border border-emerald-500/60 bg-zinc-900 px-4 py-2 text-sm font-semibold text-emerald-300 shadow-[0_0_18px_rgba(52,211,153,0.45)]"
-        >
-          Camo desbloqueado: {unlockedFlash}
-        </div>
       )}
 
       <dialog
