@@ -35,12 +35,24 @@ insert into public.easter_egg_step_progress (step_id, done_at) values ('test-ee-
 insert into public.easter_egg_completions (easter_egg_id, completed_at, players, notes)
   values ('test-ee', '2026-11-05T10:00:00Z', 3, 'à primeira');
 insert into public.challenge_progress (challenge_id, current_count) values ('test-ch', 2);
+-- Coleções da versão 2.
+insert into public.user_camo_overrides (camo_id, requirement_type, requirement_text, requirement_value)
+  values ('test-camo', 'headshots', 'texto meu', 50);
+insert into public.pinned_weapons (weapon_id, sort_order) values ('w2', 0), ('w1', 1);
+insert into public.camo_notes (weapon_id, camo_id, body) values ('w1', 'test-camo', 'nota do camo');
+insert into public.weapon_notes (weapon_id, body) values ('w1', 'nota da arma');
+insert into public.goals (title, type, target, weapon_class, period) values ('10 camos SMG', 'camo_count', 10, 'smg', 'weekly');
+insert into public.user_settings (player_name, sound_enabled, sound_volume) values ('Jogador', false, 0.25);
+-- Uma sessão ao vivo (sem ronda) também vai no backup.
+insert into public.sessions (map_id, status, played_at) values ('test-map', 'live', '2026-11-06T10:00:00Z');
 
 insert into snap values ('a1', public.export_progress());
 
 select is((select data->>'format' from snap where name = 'a1'), 'bo4-zombies-companion', 'formato no export');
-select is((select data->>'version' from snap where name = 'a1'), '1', 'versão no export');
-select is((select jsonb_array_length(data->'sessions') from snap where name = 'a1'), 2, 'export tem as 2 sessões');
+select is((select data->>'version' from snap where name = 'a1'), '2', 'versão no export');
+select is((select jsonb_array_length(data->'sessions') from snap where name = 'a1'), 3, 'export tem as 3 sessões');
+select is((select data->'sessions'->2->>'status' from snap where name = 'a1'), 'live', 'export guarda o estado da sessão');
+select is((select data->'user_settings'->>'player_name' from snap where name = 'a1'), 'Jogador', 'export tem as definições');
 select is((select jsonb_array_length(data->'sessions'->0->'weapon_stats') from snap where name = 'a1'), 2,
   'export tem as stats por arma');
 select ok((select not (data::text like '%11111111-1111%') from snap where name = 'a1'), 'export não contém o user_id');
@@ -57,8 +69,10 @@ select is(
   public.import_progress((select data from snap where name = 'a1')),
   (select jsonb_object_agg(k, jsonb_array_length(data->k))
    from snap, unnest(array['sessions', 'challenge_progress', 'weapon_camo_progress',
-                           'easter_egg_completions', 'easter_egg_step_progress']) as k
-   where name = 'a1'),
+                           'easter_egg_completions', 'easter_egg_step_progress',
+                           'user_camo_overrides', 'pinned_weapons', 'camo_notes',
+                           'weapon_notes', 'goals']) as k
+   where name = 'a1') || jsonb_build_object('user_settings', 1),
   'import devolve as contagens de cada coleção');
 insert into snap values ('a2', public.export_progress());
 select is((select data - 'exported_at' from snap where name = 'a2'),
@@ -79,7 +93,7 @@ select is((select data - 'exported_at' from snap where name = 'b1'),
 -- ---------- Erros: nada muda ----------
 select throws_ok($$ select public.import_progress('{"format":"outro","version":1}') $$, '22023', null,
   'formato desconhecido é recusado');
-select throws_ok($$ select public.import_progress('{"format":"bo4-zombies-companion","version":2}') $$, '22023', null,
+select throws_ok($$ select public.import_progress('{"format":"bo4-zombies-companion","version":3}') $$, '22023', null,
   'versão desconhecida é recusada');
 select throws_ok(
   $$ select public.import_progress('{"format":"bo4-zombies-companion","version":1,"weapon_camo_progress":[{"weapon_id":"nao-existe","camo_id":"test-camo","current_count":1,"unlocked_at":null}]}') $$,
@@ -95,6 +109,12 @@ insert into snap values ('a3', public.export_progress());
 select is((select data - 'exported_at' from snap where name = 'a3'),
           (select data - 'exported_at' from snap where name = 'a1'),
           'o progresso de A ficou intacto');
+
+-- Backups da versão 1 (sem as coleções novas) continuam a ser aceites.
+select is(
+  public.import_progress('{"format":"bo4-zombies-companion","version":1,"sessions":[{"map_id":"test-map","played_at":"2026-11-01T20:00:00Z","round_reached":7,"mode":"normal","players":1,"source":"manual","notes":null,"weapon_stats":[]}]}')->>'sessions',
+  '1', 'backup v1 continua a ser aceite');
+select is((select status from public.sessions), 'done', 'sessão de um backup v1 entra como terminada');
 
 reset role;
 set local role anon;

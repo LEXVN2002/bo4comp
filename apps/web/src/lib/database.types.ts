@@ -171,7 +171,49 @@ isOneToOne: false
                   Relationships: [
                     
                   ]
-                },"session_weapon_stats": {
+                },"camo_notes": {
+                  Row: { "body": string, "camo_id": string, "updated_at": string, "user_id": string, "weapon_id": string }
+                  ComputedFields: never
+                  Insert: { "body"?: string, "camo_id": string, "updated_at"?: string, "user_id"?: string, "weapon_id": string }
+                  Update: { "body"?: string, "camo_id"?: string, "updated_at"?: string, "user_id"?: string, "weapon_id"?: string }
+                  Relationships: [{ foreignKeyName: "camo_notes_camo_id_fkey"; columns: ["camo_id"]; isOneToOne: false; referencedRelation: "camos"; referencedColumns: ["id"] }, { foreignKeyName: "camo_notes_weapon_id_fkey"; columns: ["weapon_id"]; isOneToOne: false; referencedRelation: "weapons"; referencedColumns: ["id"] }]
+                },
+                "goals": {
+                  Row: { "archived_at": string | null, "camo_id": string | null, "created_at": string, "id": string, "period": string, "target": number, "title": string, "type": string, "user_id": string, "weapon_class": string | null, "weapon_id": string | null }
+                  ComputedFields: never
+                  Insert: { "archived_at"?: string | null, "camo_id"?: string | null, "created_at"?: string, "id"?: string, "period"?: string, "target": number, "title": string, "type": string, "user_id"?: string, "weapon_class"?: string | null, "weapon_id"?: string | null }
+                  Update: { "archived_at"?: string | null, "camo_id"?: string | null, "created_at"?: string, "id"?: string, "period"?: string, "target"?: number, "title"?: string, "type"?: string, "user_id"?: string, "weapon_class"?: string | null, "weapon_id"?: string | null }
+                  Relationships: [{ foreignKeyName: "goals_camo_id_fkey"; columns: ["camo_id"]; isOneToOne: false; referencedRelation: "camos"; referencedColumns: ["id"] }, { foreignKeyName: "goals_weapon_id_fkey"; columns: ["weapon_id"]; isOneToOne: false; referencedRelation: "weapons"; referencedColumns: ["id"] }]
+                },
+                "pinned_weapons": {
+                  Row: { "pinned_at": string, "sort_order": number, "user_id": string, "weapon_id": string }
+                  ComputedFields: never
+                  Insert: { "pinned_at"?: string, "sort_order"?: number, "user_id"?: string, "weapon_id": string }
+                  Update: { "pinned_at"?: string, "sort_order"?: number, "user_id"?: string, "weapon_id"?: string }
+                  Relationships: [{ foreignKeyName: "pinned_weapons_weapon_id_fkey"; columns: ["weapon_id"]; isOneToOne: false; referencedRelation: "weapons"; referencedColumns: ["id"] }]
+                },
+                "user_camo_overrides": {
+                  Row: { "camo_id": string, "requirement_text": string | null, "requirement_type": string | null, "requirement_value": number | null, "updated_at": string, "user_id": string }
+                  ComputedFields: never
+                  Insert: { "camo_id": string, "requirement_text"?: string | null, "requirement_type"?: string | null, "requirement_value"?: number | null, "updated_at"?: string, "user_id"?: string }
+                  Update: { "camo_id"?: string, "requirement_text"?: string | null, "requirement_type"?: string | null, "requirement_value"?: number | null, "updated_at"?: string, "user_id"?: string }
+                  Relationships: [{ foreignKeyName: "user_camo_overrides_camo_id_fkey"; columns: ["camo_id"]; isOneToOne: false; referencedRelation: "camos"; referencedColumns: ["id"] }]
+                },
+                "user_settings": {
+                  Row: { "player_name": string | null, "sound_enabled": boolean, "sound_volume": number, "updated_at": string, "user_id": string }
+                  ComputedFields: never
+                  Insert: { "player_name"?: string | null, "sound_enabled"?: boolean, "sound_volume"?: number, "updated_at"?: string, "user_id"?: string }
+                  Update: { "player_name"?: string | null, "sound_enabled"?: boolean, "sound_volume"?: number, "updated_at"?: string, "user_id"?: string }
+                  Relationships: []
+                },
+                "weapon_notes": {
+                  Row: { "body": string, "updated_at": string, "user_id": string, "weapon_id": string }
+                  ComputedFields: never
+                  Insert: { "body"?: string, "updated_at"?: string, "user_id"?: string, "weapon_id": string }
+                  Update: { "body"?: string, "updated_at"?: string, "user_id"?: string, "weapon_id"?: string }
+                  Relationships: [{ foreignKeyName: "weapon_notes_weapon_id_fkey"; columns: ["weapon_id"]; isOneToOne: false; referencedRelation: "weapons"; referencedColumns: ["id"] }]
+                },
+                "session_weapon_stats": {
                   Row: {
                     "headshots": number,"kills": number,"session_id": string,"weapon_id": string
                   }
@@ -199,14 +241,14 @@ isOneToOne: false
                   ]
                 },"sessions": {
                   Row: {
-                    "id": string,"map_id": string,"mode": string,"notes": string | null,"played_at": string,"players": number,"round_reached": number,"source": string,"user_id": string
+                    "id": string,"map_id": string,"mode": string,"notes": string | null,"played_at": string,"players": number,"round_reached": number | null,"source": string,"status": string,"user_id": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "id"?: string,"map_id": string,"mode"?: string,"notes"?: string | null,"played_at"?: string,"players"?: number,"round_reached": number,"source"?: string,"user_id"?: string
+                    "id"?: string,"map_id": string,"mode"?: string,"notes"?: string | null,"played_at"?: string,"players"?: number,"round_reached"?: number | null,"source"?: string,"status"?: string,"user_id"?: string
                   }
                   Update: {
-                    "id"?: string,"map_id"?: string,"mode"?: string,"notes"?: string | null,"played_at"?: string,"players"?: number,"round_reached"?: number,"source"?: string,"user_id"?: string
+                    "id"?: string,"map_id"?: string,"mode"?: string,"notes"?: string | null,"played_at"?: string,"players"?: number,"round_reached"?: number | null,"source"?: string,"status"?: string,"user_id"?: string
                   }
                   Relationships: [
                     {
@@ -292,8 +334,12 @@ isOneToOne: false
 "insert_session_weapon_stats":
 { Args: { "p_session_id": string,"p_weapon_stats": Json }; Returns: undefined
                            },
+"effective_camo_requirements":
+{ Args: Record<PropertyKey, never>; Returns: { camo_id: string; requirement_type: string; requirement_value: number | null }[]
+                           },
 "record_session":
-{ Args: { "p_map_id": string,"p_mode"?: string,"p_notes"?: string,"p_played_at"?: string,"p_players"?: number,"p_round_reached": number,"p_weapon_stats"?: Json }; Returns: string
+| { Args: { "p_map_id": string,"p_mode"?: string,"p_notes"?: string,"p_played_at"?: string,"p_players"?: number,"p_round_reached": number,"p_weapon_stats"?: Json }; Returns: string }
+| { Args: { "p_round_reached": number,"p_session_id": string }; Returns: { camo_id: string; weapon_id: string }[]
                            },
 "unlock_mastery_camos":
 { Args: { "p_weapon_ids": (string)[] }; Returns: undefined

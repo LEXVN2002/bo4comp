@@ -196,6 +196,10 @@ function SummaryList({ summary }: { summary: BackupSummary }) {
       <li>{summary.steps} passos de easter eggs</li>
       <li>{summary.completions} conclusões de easter eggs</li>
       <li>{summary.challenges} desafios</li>
+      {summary.overrides > 0 && <li>{summary.overrides} requisitos de camos editados</li>}
+      {summary.pinnedWeapons > 0 && <li>{summary.pinnedWeapons} armas afixadas</li>}
+      {summary.notes > 0 && <li>{summary.notes} notas</li>}
+      {summary.goals > 0 && <li>{summary.goals} objetivos</li>}
     </ul>
   );
 }

@@ -21,6 +21,16 @@ export interface SessionWithStats {
   session_weapon_stats: { weapon_id: string; kills: number; headshots: number }[];
 }
 
+/**
+ * Sessões terminadas têm sempre ronda (constraint round_required_when_done).
+ * As consultas filtram status = 'done'; isto só estreita o tipo.
+ */
+export function isFinished<S extends { round_reached: number | null }>(
+  session: S,
+): session is S & { round_reached: number } {
+  return session.round_reached !== null;
+}
+
 /** Última sessão registada: serve para pré-selecionar mapa, modo e jogadores. */
 export function useLastSession() {
   return useQuery({
@@ -54,6 +64,7 @@ export function useSessions(filters: SessionFilters) {
       let query = getSupabase()
         .from('sessions')
         .select(SESSION_COLUMNS)
+        .eq('status', 'done')
         .order('played_at', { ascending: false })
         .order('id', { ascending: false })
         .range(pageParam * SESSIONS_PAGE_SIZE, (pageParam + 1) * SESSIONS_PAGE_SIZE - 1);
@@ -61,7 +72,7 @@ export function useSessions(filters: SessionFilters) {
       if (filters.mode) query = query.eq('mode', filters.mode);
       const { data, error } = await query;
       if (error) throw error;
-      return data;
+      return data.filter(isFinished);
     },
     getNextPageParam: (lastPage, pages) =>
       lastPage.length === SESSIONS_PAGE_SIZE ? pages.length : undefined,
@@ -76,9 +87,10 @@ export function useSession(sessionId: string) {
         .from('sessions')
         .select(SESSION_COLUMNS)
         .eq('id', sessionId)
+        .eq('status', 'done')
         .maybeSingle();
       if (error) throw error;
-      return data;
+      return data && isFinished(data) ? data : null;
     },
   });
 }

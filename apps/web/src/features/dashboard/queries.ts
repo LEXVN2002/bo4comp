@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getSupabase } from '../../lib/supabase';
-import { sessionsKey, type SessionWithStats } from '../sessions/queries';
+import { isFinished, sessionsKey, type SessionWithStats } from '../sessions/queries';
 
 export interface BestRound {
   map_id: string;
@@ -38,11 +38,12 @@ export function useRecentSessions(limit: number) {
         .select(
           'id, map_id, played_at, round_reached, mode, players, source, notes, session_weapon_stats(weapon_id, kills, headshots)',
         )
+        .eq('status', 'done')
         .order('played_at', { ascending: false })
         .order('id', { ascending: false })
         .limit(limit);
       if (error) throw error;
-      return data;
+      return data.filter(isFinished);
     },
   });
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { backupFileName, parseBackup, type Backup, type CatalogIds } from './backup';
+import { backupFileName, parseBackup, type BackupInput, type CatalogIds } from './backup';
 
 const catalog: CatalogIds = {
   maps: new Set(['ix']),
@@ -10,10 +10,10 @@ const catalog: CatalogIds = {
   challenges: new Set(['ch-1']),
 };
 
-function backup(overrides: Partial<Backup> = {}): Backup {
+function backup(overrides: Partial<BackupInput> = {}): BackupInput {
   return {
     format: 'bo4-zombies-companion',
-    version: 1,
+    version: 2,
     exported_at: '2026-11-12T10:00:00.123456+00:00',
     weapon_camo_progress: [
       { weapon_id: 'saug-9mm', camo_id: 'overgrowth', current_count: 40, unlocked_at: null },
@@ -33,9 +33,47 @@ function backup(overrides: Partial<Backup> = {}): Backup {
         players: 1,
         source: 'manual',
         notes: null,
+        status: 'done',
         weapon_stats: [{ weapon_id: 'titan', kills: 30, headshots: 5 }],
       },
+      {
+        map_id: 'ix',
+        played_at: '2026-11-12T19:00:00+00:00',
+        round_reached: null,
+        mode: 'normal',
+        players: 1,
+        source: 'manual',
+        notes: null,
+        status: 'live',
+        weapon_stats: [],
+      },
     ],
+    user_camo_overrides: [
+      {
+        camo_id: 'overgrowth',
+        requirement_type: 'kills',
+        requirement_text: null,
+        requirement_value: 100,
+        updated_at: '2026-11-11T20:00:00+00:00',
+      },
+    ],
+    pinned_weapons: [{ weapon_id: 'titan', sort_order: 0, pinned_at: '2026-11-11T20:00:00+00:00' }],
+    camo_notes: [{ weapon_id: 'titan', camo_id: 'gold', body: 'x', updated_at: '2026-11-11T20:00:00+00:00' }],
+    weapon_notes: [{ weapon_id: 'titan', body: 'y', updated_at: '2026-11-11T20:00:00+00:00' }],
+    goals: [
+      {
+        title: '10 camos',
+        type: 'camo_count',
+        target: 10,
+        weapon_id: null,
+        weapon_class: 'smg',
+        camo_id: null,
+        period: 'weekly',
+        created_at: '2026-11-11T20:00:00+00:00',
+        archived_at: null,
+      },
+    ],
+    user_settings: { player_name: 'Jogador', sound_enabled: true, sound_volume: 0.6 },
     ...overrides,
   };
 }
@@ -47,12 +85,16 @@ describe('parseBackup', () => {
     if (result.ok) {
       expect(result.summary).toEqual({
         exportedAt: '2026-11-12T10:00:00.123456+00:00',
-        sessions: 1,
+        sessions: 2,
         camoRows: 2,
         unlockedCamos: 1,
         steps: 1,
         completions: 1,
         challenges: 1,
+        overrides: 1,
+        pinnedWeapons: 1,
+        notes: 2,
+        goals: 1,
       });
     }
   });
@@ -75,8 +117,52 @@ describe('parseBackup', () => {
   it('recusa outro formato ou outra versão', () => {
     const other = parseBackup(JSON.stringify({ ...backup(), format: 'outro' }), catalog);
     expect(!other.ok && other.errors.join()).toMatch(/não é um backup/);
-    const v2 = parseBackup(JSON.stringify({ ...backup(), version: 2 }), catalog);
-    expect(!v2.ok && v2.errors.join()).toMatch(/versão não suportada/);
+    const v3 = parseBackup(JSON.stringify({ ...backup(), version: 3 }), catalog);
+    expect(!v3.ok && v3.errors.join()).toMatch(/versão não suportada/);
+  });
+
+  it('aceita backups da versão 1, sem as coleções novas', () => {
+    const v1 = {
+      format: 'bo4-zombies-companion',
+      version: 1,
+      exported_at: '2026-11-12T10:00:00+00:00',
+      weapon_camo_progress: [],
+      easter_egg_step_progress: [],
+      easter_egg_completions: [],
+      challenge_progress: [],
+      sessions: [
+        {
+          map_id: 'ix',
+          played_at: '2026-11-11T19:00:00+00:00',
+          round_reached: 20,
+          mode: 'normal',
+          players: 1,
+          source: 'manual',
+          notes: null,
+          weapon_stats: [],
+        },
+      ],
+    };
+    const result = parseBackup(JSON.stringify(v1), catalog);
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.backup.sessions[0]!.status).toBe('done');
+      expect(result.backup.goals).toEqual([]);
+      expect(result.backup.user_settings).toBeNull();
+    }
+  });
+
+  it('recusa sessões terminadas sem ronda', () => {
+    const bad = backup();
+    bad.sessions[0]!.round_reached = null;
+    const result = parseBackup(JSON.stringify(bad), catalog);
+    expect(!result.ok && result.errors.join()).toMatch(/sessão terminada sem ronda/);
+  });
+
+  it('verifica no catálogo as referências das coleções novas', () => {
+    const pinned = [{ weapon_id: 'nao-existe', sort_order: 0, pinned_at: '2026-11-11T20:00:00+00:00' }];
+    const result = parseBackup(JSON.stringify(backup({ pinned_weapons: pinned })), catalog);
+    expect(!result.ok && result.errors.join()).toMatch(/armas que não existem no catálogo atual: nao-existe/);
   });
 
   it('recusa valores inválidos com o caminho do campo', () => {
