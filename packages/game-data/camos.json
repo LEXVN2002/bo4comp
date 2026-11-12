@@ -1,0 +1,172 @@
+[
+  {
+    "id": "overgrowth",
+    "name": "Overgrowth",
+    "tier": 1,
+    "kind": "zombies",
+    "requirement_type": "kills",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "tundra",
+    "name": "Tundra",
+    "tier": 2,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "rend",
+    "name": "Rend",
+    "tier": 3,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "tropic",
+    "name": "Tropic",
+    "tier": 4,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "roil",
+    "name": "Roil",
+    "tier": 5,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "mangrove",
+    "name": "Mangrove",
+    "tier": 6,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "clash",
+    "name": "Clash",
+    "tier": 7,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "dune",
+    "name": "Dune",
+    "tier": 8,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "green-tiger",
+    "name": "Green Tiger",
+    "tier": 9,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "gutter-ball",
+    "name": "Gutter Ball",
+    "tier": 10,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "spore",
+    "name": "Spore",
+    "tier": 11,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "red-hex-redux",
+    "name": "Red Hex Redux",
+    "tier": 12,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "emerald-ug",
+    "name": "Emerald UG",
+    "tier": 13,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "silverfish",
+    "name": "Silverfish",
+    "tier": 14,
+    "kind": "zombies",
+    "requirement_type": "unknown",
+    "requirement_value": null,
+    "requirement_text": "Por confirmar no jogo",
+    "verified": false
+  },
+  {
+    "id": "gold",
+    "name": "Gold",
+    "tier": 15,
+    "kind": "mastery",
+    "requirement_type": "prereq_all",
+    "requirement_value": null,
+    "requirement_text": "Desbloquear todos os camos anteriores da arma (confirmar)",
+    "verified": false
+  },
+  {
+    "id": "diamond",
+    "name": "Diamond",
+    "tier": 16,
+    "kind": "mastery",
+    "requirement_type": "prereq_all",
+    "requirement_value": null,
+    "requirement_text": "Desbloquear todos os camos anteriores da arma (confirmar)",
+    "verified": false
+  },
+  {
+    "id": "dark-matter",
+    "name": "Dark Matter",
+    "tier": 17,
+    "kind": "mastery",
+    "requirement_type": "prereq_all",
+    "requirement_value": null,
+    "requirement_text": "Desbloquear todos os camos anteriores da arma (confirmar)",
+    "verified": false
+  }
+]

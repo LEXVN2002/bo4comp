@@ -1,0 +1,1117 @@
+[
+  {
+    "id": "ix-main",
+    "map_id": "ix",
+    "name": "IX — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "sources": [
+      "https://www.powerpyx.com/cod-black-ops-4-zombies-ix-pack-a-punch-guide/",
+      "https://www.powerpyx.com/cod-black-ops-4-ix-how-to-build-the-zombie-shield/",
+      "https://www.accelerated-ideas.com/news/zombies-ix-all-easter-egg-steps-black-ops-4.aspx"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "section": "Pack-a-Punch",
+        "title": "Matar o Champion de cada uma das 4 torres",
+        "details": "Em cada sala de altar (Ra, Danu, Odin e Zeus) toca no gongo para chamar um Champion. Mata-o e apanha a cabeça que fica no pedestal ao centro.\nOrdem prática: Ra (primeira porta à direita da arena, sobe as escadas) → Danu (pela ponte) → Odin (caminho longo pelo subterrâneo; mantém-te sempre pelo lado esquerdo) → Zeus (pela ponte levadiça).\nAs fontes divergem sobre se as 4 torres estão abertas desde o início ou só 2."
+      },
+      {
+        "order": 2,
+        "section": "Pack-a-Punch",
+        "title": "Colocar as 4 cabeças no Temple",
+        "details": "Vai ao Temple (subterrâneo, pelas Crypts / Flooded Crypt) e espeta cada cabeça num dos 4 espigões à frente do pilar central (\"Hold to feed the altar\"). O pilar transforma-se no Pack-a-Punch.\nPack-a-Punch: 5000 pontos. Voltar a meter a arma custa 2500 e dá um efeito elemental (sem munição)."
+      },
+      {
+        "order": 3,
+        "section": "Escudo",
+        "title": "Visor — Ra Tower (piso de cima)",
+        "details": "Possíveis sítios: no canto ao lado da máquina de perk de Ra; por baixo da parede da M1897 Trebuchet; do lado oposto, entre dois pilares num canto. Uma das fontes indica também junto ao gongo / em frente à caixa."
+      },
+      {
+        "order": 4,
+        "section": "Escudo",
+        "title": "Escudo — Odin Tower (qualquer piso)",
+        "details": "Piso de cima (Odin Altar Room): junto ao barril de lanças perto da perk de Odin. Piso do meio (Entrance): no suporte de escudos. Piso de baixo (Cauldron): junto à jaula, num canto escuro."
+      },
+      {
+        "order": 5,
+        "section": "Escudo",
+        "title": "Lâmina — Zeus Tower (qualquer piso)",
+        "details": "Piso de cima (Altar Room): aos pés da estátua perto da perk de Zeus. Piso do meio (Entrance): na mão da estátua junto às escadas. Piso de baixo (Bath House): no altar perto das escadas (outra fonte diz numa saliência junto ao mural de pedra)."
+      },
+      {
+        "order": 6,
+        "section": "Escudo",
+        "title": "Construir o Brazen Bull",
+        "details": "Em qualquer bancada; a mais prática fica no centro do subterrâneo, junto a The Pit. As peças mudam de sítio a cada partida."
+      },
+      {
+        "order": 7,
+        "section": "Death of Orion",
+        "title": "Peças da armadilha de ácido",
+        "details": "Pote: completa 3 desafios na arena (começa um desafio esfaqueando uma das cordas das bandeiras).\nCorrente: da Danu-Ra Entrance para o Temple, logo à esquerda numa sala pequena, pendurada na tocha.\nEngrenagem: na sala diagonalmente oposta, depois do Pack-a-Punch, debaixo da jaula com o esqueleto."
+      },
+      {
+        "order": 8,
+        "section": "Death of Orion",
+        "title": "Disparar à taça em chamas",
+        "details": "De costas para o Pack-a-Punch, segue em frente até à Danu-Ra Temple Entrance e acerta na taça em chamas atrás do portão com uma arma com Pack-a-Punch ou uma granada."
+      },
+      {
+        "order": 9,
+        "section": "Death of Orion",
+        "title": "Encontrar a cabeça",
+        "details": "Na ponte de pedra entre Ra e Danu, olha para a arena: a seta em chamas aponta para a zona da cabeça. Sítios: Danu Arboretum (na água), Ra Burial Chamber (num braseiro), Odin Cauldron (por baixo do caldeirão), Zeus Bath House (canto do banho de sangue)."
+      },
+      {
+        "order": 10,
+        "section": "Death of Orion",
+        "title": "Construir a armadilha e obter o escorpião",
+        "details": "Constrói a armadilha de ácido à entrada de um dos templos a partir da arena, põe a cabeça na grelha do chão, espera que ative e apanha o escorpião."
+      },
+      {
+        "order": 11,
+        "section": "Death of Orion",
+        "title": "Ganhar o pote dourado na arena",
+        "details": "Faz muitas kills na arena com a arma de especialista sem levar dano até aparecer o polegar verde; quando o anunciador disser \"A gift from the gods\", apanha o pote dourado no chão da arena."
+      },
+      {
+        "order": 12,
+        "section": "Death of Orion",
+        "title": "Árvore de Danu",
+        "details": "No piso de baixo do Danu Arboretum, coloca o escorpião no buraco da árvore e o pote na base. Faz kills, acaba a ronda e apanha o pote."
+      },
+      {
+        "order": 13,
+        "section": "Death of Orion",
+        "title": "Envenenar a caixa e tirar a Death of Orion",
+        "details": "Interage com o lado esquerdo da Mystery Box para lhe dar o pote; espera uns segundos e tira a Death of Orion. Com Pack-a-Punch passa a Serket's Kiss (necessária mais tarde)."
+      },
+      {
+        "order": 14,
+        "section": "Quest principal",
+        "title": "Purge the Blight: carvão",
+        "details": "Na arena, espera por um zombie de machado e faz com que atire o machado a uma pira para soltar madeira. Põe a madeira no caldeirão de Odin Cauldron e apanha o carvão cerca de 3 rondas depois."
+      },
+      {
+        "order": 15,
+        "section": "Quest principal",
+        "title": "Purge the Blight: osso",
+        "details": "Só aparece depois da wonder weapon. Procura perto da sala do Pack-a-Punch um crânio com um símbolo azul ténue, solta-o com a arma de especialista e apanha-o. Na Flooded Crypt, carrega o moedor da parede com 3 disparos totalmente carregados da Death of Orion e recolhe o osso.\nSe o crânio não aparecer, a fonte recomenda recomeçar a partida."
+      },
+      {
+        "order": 16,
+        "section": "Quest principal",
+        "title": "Purge the Blight: fertilizante",
+        "details": "Na arena atira 3 granadas ao público e apanha o que te atiram de volta. Junta isso, o osso e o carvão na taça junto ao banho de sangue da Zeus Bath House; ~2 rondas depois apanha o fertilizante e põe-no no chão entre as duas árvores do Danu Arboretum. Espera ~3 rondas até fumegar verde."
+      },
+      {
+        "order": 17,
+        "section": "Quest principal",
+        "title": "Purge the Blight: esporos",
+        "details": "Com uma arma com o efeito Firebomb, faz kills em cima do fertilizante até o chão ficar azul. Fica em cima do símbolo ~10 s para ires para um Danu a preto e branco; sobrevive e dispara aos esporos vermelhos da árvore."
+      },
+      {
+        "order": 18,
+        "section": "Quest principal",
+        "title": "Answer the Dawn: touros",
+        "details": "Com o escudo construído, acerta com ele em 4 touros (a fonte lista 9 sítios possíveis, por exemplo Flooded Crypt, ponte levadiça, The Pit, Temple, arena, Danu Altar Room, Ra Burial Chamber). Cada touro em chamas faz aparecer um Champion; mata-o."
+      },
+      {
+        "order": 19,
+        "section": "Quest principal",
+        "title": "Answer the Dawn: obelisco de Ra",
+        "details": "No altar de Ra, todos os jogadores interagem com o obelisco para irem para um Ra alternativo. Aparecem 4 símbolos: mata os zombies especiais pela ordem indicada (falhar obriga a esperar pela ronda seguinte). Repete para o segundo conjunto.\nO mapeamento símbolo → tipo de zombie está numa imagem do guia, não no texto."
+      },
+      {
+        "order": 20,
+        "section": "Quest principal",
+        "title": "Summon the Storm: postes",
+        "details": "Todos ao centro da arena para descer ao subterrâneo. Dispara aos 4 postes até subirem: Collapsed Tunnel, Odin Tunnel, Danu Tunnel e Cursed Room."
+      },
+      {
+        "order": 21,
+        "section": "Quest principal",
+        "title": "Summon the Storm: orbes",
+        "details": "Volta à arena, desce de novo pela pedra central e regressa. Com uma arma com Kill-O-Watt, mata zombies atordoados dentro dos círculos junto às orbes até as encher. Todos na plataforma central: sobrevive à vaga de gladiadores."
+      },
+      {
+        "order": 22,
+        "section": "Quest principal",
+        "title": "Channel the Flood: símbolos",
+        "details": "Aparecem 9 símbolos azuis. Acerta em 3 de cada vez com um único disparo da Serket's Kiss (se ficarem acesos, está certo). Bons pontos: The Pit, Danu Tunnel, The Crypts."
+      },
+      {
+        "order": 23,
+        "section": "Quest principal",
+        "title": "Channel the Flood: sobreviver à cheia",
+        "details": "Todos em The Pit, em cima da grelha ao fundo. Dispara a arma de especialista à grelha e interagem todos. Sobrevive enquanto a água sobe; acaba ao matar os dois Blight Fathers finais."
+      },
+      {
+        "order": 24,
+        "section": "Boss final",
+        "title": "Elefantes",
+        "details": "Entra no portal central (último sítio para reabastecer). Primeiro elefante: parte a armadura para derrubar o cavaleiro e dispara à testa. Segue-se um segundo elefante mais forte: armadura e depois a testa. Ao matá-lo, começa a cena final."
+      }
+    ]
+  },
+  {
+    "id": "voyage-of-despair-main",
+    "map_id": "voyage-of-despair",
+    "name": "Voyage of Despair — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "sources": [
+      "https://www.powerpyx.com/cod-bo4-voyage-of-despair-how-to-get-sentinel-artifact/",
+      "https://www.powerpyx.com/cod-bo4-voyage-of-despair-pack-a-punch-guide/",
+      "https://www.powerpyx.com/cod-bo4-voyage-of-despair-how-to-build-the-shield/",
+      "https://www.accelerated-ideas.com/news/voyage-of-despair-all-easter-egg-steps.aspx",
+      "https://www.accelerated-ideas.com/news/zombies-voyage-of-despair-how-to-get-the-kraken-wonder.aspx",
+      "https://segmentnext.com/black-ops-4-zombies-voyage-of-despair-easter-egg"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "section": "Preparação",
+        "title": "Ativar o Sentinel Artifact",
+        "details": "Atravessa o navio até ao Poop Deck: sobe, passa a cabine do capitão, desce um piso, atravessa o lounge (porta à direita do altar de perks), segue o corredor de chão branco até ao convés, sobe pelos destroços à direita e compra a passagem seguinte. Interage com o artefacto azul: 4 orbes vermelhas voam para os pedestais e o mapa fica todo acessível."
+      },
+      {
+        "order": 2,
+        "section": "Pack-a-Punch",
+        "title": "Ativar os 4 pedestais",
+        "details": "Poop Deck (à frente do artefacto); Turbine Room (debaixo de água); fundo da Grand Staircase; Cargo Hold (inundado — há um mecanismo para escoar a água).\nO Pack-a-Punch aparece no último pedestal que ativares, por isso escolhe-o bem. 5000 pontos; 2500 para efeito elemental.\nUma fonte troca a Turbine Room pela Boiler Room."
+      },
+      {
+        "order": 3,
+        "section": "Escudo",
+        "title": "Pega — State Rooms (1st Class)",
+        "details": "Lavandaria, numa prateleira ao centro; quarto ao lado com poltrona (Saug 9mm à porta); quarto ao lado com cadeira de madeira (MOG 12 à porta)."
+      },
+      {
+        "order": 4,
+        "section": "Escudo",
+        "title": "Visor — Bridge",
+        "details": "No exterior depois das escadas à direita, encostado ao corrimão; nos corredores perto da porta da Upper Grand Staircase, num corrimão; na sala seguinte, à frente de uma caixa de madeira."
+      },
+      {
+        "order": 5,
+        "section": "Escudo",
+        "title": "Escudo — Provisions",
+        "details": "Na escada das 3rd Class Berths, num corrimão; em Provisions, no canto em cima de uma caixa; numa caixa junto à ICR-7, à porta da Engine Room."
+      },
+      {
+        "order": 6,
+        "section": "Escudo",
+        "title": "Construir o escudo",
+        "details": "Numa bancada. O guia não indica qual; comentários apontam a bancada perto do artefacto no Poop Deck."
+      },
+      {
+        "order": 7,
+        "section": "Kraken",
+        "title": "Obter a Kraken",
+        "details": "Sai da Mystery Box. Com Pack-a-Punch fica com carregador de 12."
+      },
+      {
+        "order": 8,
+        "section": "Kraken",
+        "title": "Peças da bancada de upgrade",
+        "details": "Tubo: Galley, à esquerda das prateleiras com tachos. Cano: Cargo Hold, debaixo de água, numa caixa junto à rede. Câmara: 1st Class Lounge, numa mesa branca junto à janela e à planta. A quarta peça cai de zombies elementais."
+      },
+      {
+        "order": 9,
+        "section": "Kraken",
+        "title": "Mudar o tipo de munição",
+        "details": "Mata o zombie elemental do tipo pretendido, apanha as partes que deixa e troca a munição na bancada (3000 pontos). Para a quest vais precisar da versão ácida / Decay.\nOs guias só detalham fogo e gelo; o resto não está descrito."
+      },
+      {
+        "order": 10,
+        "section": "Quest principal",
+        "title": "Relógios",
+        "details": "Depois do Pack-a-Punch aparecem relógios em 6 sítios, mas só 4 têm hora: Mail Room, Captain's Bridge, Grand Staircase, 1st Class Lounge, Galley e 3rd Class. Junto a cada relógio há um símbolo.\nNa roda do Bridge há 4 mostradores: põe em cada um o símbolo da sala e os minutos indicados (passos de 5 min). A hora acerta-se nos mostradores da Engine Room e do Poop Deck. Quando tudo bate certo, ouves um som e os mostradores bloqueiam."
+      },
+      {
+        "order": 11,
+        "section": "Quest principal",
+        "title": "Ensaios elementais nas tomadas",
+        "details": "Há 6 tomadas e 4 deitam um elemento: State Rooms (primeiro quarto à esquerda), topo da Grand Staircase, escada da 3rd Class, Aft Decks, Galley/Dining Hall e pilar à esquerda de Zeus no 1st Class Lounge.\nMata o Catalyst do mesmo elemento na zona, fica no símbolo do chão até brilhar e interagem todos para entrar no ensaio. Ordem: ácido, água/gelo, elétrico, fogo. Ao fim recolhes o verdadeiro Sentinel Artifact."
+      },
+      {
+        "order": 12,
+        "section": "Quest principal",
+        "title": "Canos da Engine Room",
+        "details": "Dispara a cada fuga dos canos (7 canos, 9 fugas) com a Kraken ácida / Decay para encher a sala e apagar o fogo. Acaba a ronda e usa o Pack-a-Punch que aparece para melhorar o artefacto.\nAs fontes divergem entre Engine Room e Boiler Room."
+      },
+      {
+        "order": 13,
+        "section": "Quest principal",
+        "title": "Ativar os símbolos dos planetas",
+        "details": "Sol (Forecastle), Mercúrio (Mail Room), Vénus (Millionaire Suite), Lua (Lower Grand Staircase), Marte (Boiler Room), Júpiter (Engine Room, escadas), Saturno (Bridge), Neptuno (Aft Decks, numa boia) e Úrano (State Rooms, atrás da planta). Interage a partir do Sol para fora."
+      },
+      {
+        "order": 14,
+        "section": "Quest principal",
+        "title": "Maquete do sistema solar",
+        "details": "No Cargo Hold, interage com a maquete: os planetas piscam numa ordem. Dispara ao primeiro símbolo dessa ordem, apanha a orbe azul que aparece e leva-a de volta antes do tempo acabar. Repete até ao Sol, que é sempre o último."
+      },
+      {
+        "order": 15,
+        "section": "Quest principal",
+        "title": "Corrida das portas geladas",
+        "details": "Segue a última orbe azul até ao spawn e interage: aparecem blocos de gelo e um temporizador. Corre até ao Poop Deck a partir os blocos (as escadas da direita são o caminho mais rápido). Abre-se um portal para o boss."
+      },
+      {
+        "order": 16,
+        "section": "Boss final",
+        "title": "Olho gigante",
+        "details": "5 fases com teletransportes (exterior, Engine Room, State Rooms, convés lateral, Poop Deck). O raio do olho derruba quem apanhar; dá prioridade aos Blightfathers na Engine Room.\nAs fontes divergem sobre quando o olho é vulnerável (a brilhar a vermelho vs. durante o raio). No fim desintegra-se e começa a cena final.\nRecomendado: 2 a 3 jogadores; solo é possível mas o boss é muito difícil."
+      }
+    ]
+  },
+  {
+    "id": "blood-of-the-dead-main",
+    "map_id": "blood-of-the-dead",
+    "name": "Blood of the Dead — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "sources": [
+      "https://mmmrkennedyzombiesguides.pages.dev/games/BO4/blood_of_the_dead/blood_of_the_dead_guide",
+      "https://www.accelerated-ideas.com/news/blood-of-the-dead-all-easter-egg-steps.aspx",
+      "https://www.accelerated-ideas.com/news/blood-of-the-dead-spectral-shield-part-locations.aspx",
+      "https://segmentnext.com/black-ops-4-blood-of-the-dead-easter-egg"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "section": "Preparação",
+        "title": "Ligar a energia (2 interruptores)",
+        "details": "Oeste: dentro da Power House, junto à perk Brew. Leste: Building 64, na sala lateral — há 3 interruptores e 2 já estão ligados; liga o que falta. Ligar o lado leste faz sempre aparecer o Warden."
+      },
+      {
+        "order": 2,
+        "section": "Escudo",
+        "title": "Essência espiritual",
+        "details": "Numa caixa elétrica a brilhar azul: Library (junto à porta para D-Block), Times Square (à direita da Auger DMR) ou Michigan Avenue (à porta do Warden's Office)."
+      },
+      {
+        "order": 3,
+        "section": "Escudo",
+        "title": "Porta (placa)",
+        "details": "Citadel Tunnels (vários pontos na escada em caracol, incluindo o fundo) ou China Alley (perto do interruptor leste)."
+      },
+      {
+        "order": 4,
+        "section": "Escudo",
+        "title": "Chave do Warden",
+        "details": "Cai do primeiro Warden (Brutus) que matares, normalmente logo após ligares a energia leste."
+      },
+      {
+        "order": 5,
+        "section": "Escudo",
+        "title": "Construir o Spectral Shield",
+        "details": "Bancadas: Transverse Tunnel, Cell Block 3rd Floor ou Docks. Mata zombies com a chave do escudo para carregar: 3 almas por carga, máximo 2 cargas."
+      },
+      {
+        "order": 6,
+        "section": "Pack-a-Punch",
+        "title": "Ativar o Pack-a-Punch",
+        "details": "Com a energia ligada e o escudo, faz um spirit blast ao voltímetro no telhado (Roof, à direita das cadeiras elétricas). O Pack-a-Punch alterna entre 3 sítios: telhado, Power House (junto à Brew) e Building 64.\nUma fonte diz que primeiro tens de eletrocutar 3 zombies com a chave para carregar o voltímetro."
+      },
+      {
+        "order": 7,
+        "section": "Armas e itens",
+        "title": "Hell's Retriever",
+        "details": "Alimenta os 3 cães do inferno matando zombies perto deles (um de cada vez): New Industries (esquerda da GKS), Cell Block 2nd Floor (perto da Mozu) e Eagle Plaza (à porta do Warden's Office). Depois faz a viagem rápida a partir dos Showers ou da Warden's House e apanha o machado que flutua sobre uma rocha durante o voo.\nAs fontes divergem nos sítios dos cães."
+      },
+      {
+        "order": 8,
+        "section": "Armas e itens",
+        "title": "Colher",
+        "details": "No Warden's Office, vê com o escudo os 3 números nos pilares. Nos Citadel Tunnels, dá spirit blast ao teclado numérico e introduz-os (o elevador cai). Nas Docks, spirit blast ao voltímetro para a grua levantar a rede; atira o Hell's Retriever à rede para soltar o braço do esqueleto e apanha a colher.\nOutras fontes falam de um armário fechado no fundo da escada em caracol."
+      },
+      {
+        "order": 9,
+        "section": "Armas e itens",
+        "title": "Blundergat",
+        "details": "Sai da Mystery Box, ou: com o Hell's Retriever apanha os 5 crânios (só visíveis pelo escudo) — West Grounds, C-D Street, Roof, Docks e Eagle Plaza — e tira-a da mesa do Warden's Office."
+      },
+      {
+        "order": 10,
+        "section": "Armas e itens",
+        "title": "Magmagat ou Acidgat (opcional, útil)",
+        "details": "Magmagat: põe a Blundergat na lareira da Warden's House, mata zombies lá dentro até deixarem de largar essência azul, e leva a arma a arder até à prensa de New Industries passando pelos 6 barris azuis (sem fazer viagem rápida).\nAcidgat: monta o kit (caixa no Transverse Tunnel, motor em Sally Port, frasco no Infirmary) numa bancada e põe lá a Blundergat."
+      },
+      {
+        "order": 11,
+        "section": "Armas e itens",
+        "title": "Spectral Shield melhorado (recomendado)",
+        "details": "Gira a Mystery Box até aparecer um cadeado, carrega-o com a chave até ficar azul e atira-lhe o Hell's Retriever. Dá +2 spirit blasts e mais resistência."
+      },
+      {
+        "order": 12,
+        "section": "Quest principal",
+        "title": "Shock and Denial: parede da Warden's House",
+        "details": "Com escudo, Hell's Retriever e colher, bate com a colher na parede no topo das escadas, à esquerda da Titan. Faz o Warden dar um golpe no chão em frente à parede (chama-o com 666 no teclado dos Citadel Tunnels, uma vez por partida, e usa uma Monkey Bomb por baixo da parede; ou espera pela ronda 17-18)."
+      },
+      {
+        "order": 13,
+        "section": "Quest principal",
+        "title": "Pedra vermelha da sala do ritual",
+        "details": "Na sala revelada, puxa o interruptor da cadeira elétrica, apanha a pedra vermelha da mesa e põe-na no mapa da parede do Richtofen's Lab."
+      },
+      {
+        "order": 14,
+        "section": "Quest principal",
+        "title": "Pain and Guilt: gaivota e Kronorium",
+        "details": "Interage com o Kronorium no chão do Lab: uma gaivota leva-o. Dá-lhe spirit blast 3 vezes (uma por ronda); só se vê pelo escudo, mas ouve-se. Há dezenas de poisos possíveis — no fim da ronda, do topo da Gondola, a luz azul sobre a água indica a zona.\nDepois do 3.º blast, introduz 872 no teclado para ganhar Zombie Blood, volta ao sítio, e quando o Kronorium aparecer atira-lhe o Hell's Retriever (escudo guardado). Apanha-o."
+      },
+      {
+        "order": 15,
+        "section": "Quest principal",
+        "title": "Anger and Bargaining: preparar os desafios",
+        "details": "Põe o Kronorium no cadáver da cadeira da sala do ritual, pára as páginas e lê os números com o escudo. Introduz-os no teclado dos Citadel Tunnels: o farol ilumina uma orbe vermelha. Dá-lhe spirit blast para começar o desafio. Após cada desafio, volta ao Kronorium para os números seguintes."
+      },
+      {
+        "order": 16,
+        "section": "Quest principal",
+        "title": "Desafio dos Showers",
+        "details": "Um fantasma dá-te um banjo. Fica num círculo azul nos Showers e mata zombies até encher. Se levares dano contínuo, devolve o banjo e tenta outra vez. No fim cai uma pedra vermelha."
+      },
+      {
+        "order": 17,
+        "section": "Quest principal",
+        "title": "Desafio das Docks",
+        "details": "Lê com o escudo os dígitos em Morse das 3 boias (Gondola superior, Recreation Yard, Model Industries), soma-os e escreve o total em Morse no telégrafo (Sally Port; outras fontes dizem Warden's Office). Depois mata um zombie no Infirmary para chamar o fantasma e escolta-o pela Gondola até às Docks."
+      },
+      {
+        "order": 18,
+        "section": "Quest principal",
+        "title": "Desafio da Power House",
+        "details": "Olha para o fantasma junto ao interruptor até a personagem comentar. No Building 64, faz o \"Simon diz\" de 5 rondas no gerador; anota os símbolos dos painéis acesos. Põe o cartão perfurado (prateleira em China Alley) na máquina de Model Industries, vê as letras nos monitores e, na Power House, dá spirit blast ao fantasma quando ele agarra a alavanca certa (3 vezes)."
+      },
+      {
+        "order": 19,
+        "section": "Quest principal",
+        "title": "Desafio de Michigan Avenue",
+        "details": "Mata um zombie na Cafeteria para chamar o fantasma e dá-lhe spirit blast. As portas trancam: protege-o (as armas não lhe fazem dano) pelo caminho Cafeteria → D-Block → Library → Cell Block 2nd Floor → orbe. Se ficar vermelho, desaparece e repetes na ronda seguinte."
+      },
+      {
+        "order": 20,
+        "section": "Quest principal",
+        "title": "Desafio de New Industries",
+        "details": "Mata um zombie em D-Block para chamar o fantasma. Acerta-lhe com a chave até ficar vermelho (spirit blast torna-o visível ~15 s). Leva-o até New Industries e ativa a Spin Trap quando ele se aproximar da MOG 12: ele entra, morre e larga a pedra."
+      },
+      {
+        "order": 21,
+        "section": "Quest principal",
+        "title": "Pôr as 5 pedras no mapa",
+        "details": "Coloca as 5 pedras vermelhas no mapa da parede do Richtofen's Lab."
+      },
+      {
+        "order": 22,
+        "section": "Quest principal",
+        "title": "Reflection and Loneliness",
+        "details": "Na sala do ritual, põe a Summoning Key no cadáver da cadeira elétrica. Depois das cenas, recupera o equipamento no saco no topo das escadas, segue a gaivota até West Grounds e deixa os fantasmas levarem o Warden gigante. Põe a pedra que cai no mapa do Lab: abre-se uma escada secreta ao lado de uma cápsula criogénica."
+      },
+      {
+        "order": 23,
+        "section": "Boss final",
+        "title": "Warden gigante",
+        "details": "Todos interagem com a porta de metal no topo da escada. Mata a vaga inicial e guarda pelo menos uma carga de escudo. Entra no cilindro vermelho do Warden e destrói as 3 orbes vermelhas; depois dá spirit blast à orbe branca sobre o mecanismo. Repete (na 2.ª fase evita os círculos vermelhos no chão).\nNo fim, o jogador Richtofen interage com a orbe (se ninguém for Richtofen aparece um bot). Ao matar o Warden começa a cena final.\nAs fontes divergem no número de fases."
+      }
+    ]
+  },
+  {
+    "id": "classified-skadi",
+    "map_id": "classified",
+    "name": "Classified — Project Skadi (Winter's Howl)",
+    "type": "side",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "sources": [
+      "https://www.powerpyx.com/cod-black-ops-4-classified-easter-egg-guide/",
+      "https://www.powerpyx.com/cod-black-ops-4-classified-pack-a-punch-guide/",
+      "https://www.powerpyx.com/cod-bo4-classified-how-to-build-the-zombie-shield/"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "section": "Preparação",
+        "title": "Ligar a energia",
+        "details": "Desce de elevador ao War Room e depois aos Laboratories. O interruptor está na segunda sala à esquerda. Liga os teletransportadores entre os 3 pisos do Pentágono."
+      },
+      {
+        "order": 2,
+        "section": "Pack-a-Punch",
+        "title": "Defcon 5 e tampa",
+        "details": "Liga os 4 interruptores Defcon: War Room de cima (junto à Spitfire), War Room de cima (à esquerda ao sair do elevador), War Room de baixo (em frente ao descer a escada da esquerda) e Server Room. Usa o teletransportador do meio no War Room para ir à Panic Room e apanha a tampa na sala que se abre."
+      },
+      {
+        "order": 3,
+        "section": "Pack-a-Punch",
+        "title": "Fios — Morgue (Laboratories)",
+        "details": "Dentro da primeira câmara cilíndrica; na secretária ao fundo, atrás da mesa de preparação; ou na sala pequena, na cadeira junto à Mystery Box."
+      },
+      {
+        "order": 4,
+        "section": "Pack-a-Punch",
+        "title": "Cobertura — Main Offices",
+        "details": "À esquerda da secretária junto à perk Soda; ao centro numa secretária tombada; ou na zona pequena, atrás de uma mesa."
+      },
+      {
+        "order": 5,
+        "section": "Pack-a-Punch",
+        "title": "Amplificador e Groom Lake",
+        "details": "Monta o Teleporter Signal Amplifier numa bancada (Central Filing, à direita da porta dos Main Offices; ou Weapon Testing, junto ao teletransportador 3) e coloca-o no teletransportador do meio do War Room. Ativa Defcon 5 sempre que quiseres ir a Groom Lake, onde está o Pack-a-Punch."
+      },
+      {
+        "order": 6,
+        "section": "Escudo",
+        "title": "Pega — Central Filing",
+        "details": "Encostada à parede debaixo do balcão (à esquerda ao entrar); nos arquivadores ao centro (RK7 atrás); ou à esquerda da porta dos Main Offices."
+      },
+      {
+        "order": 7,
+        "section": "Escudo",
+        "title": "Escudo — War Room de baixo",
+        "details": "Debaixo da escada da esquerda; junto ao mapa circular do chão; ou no canto oposto, ao lado de uma secretária (difícil de ver)."
+      },
+      {
+        "order": 8,
+        "section": "Escudo",
+        "title": "Visor — Laboratories",
+        "details": "No chão da sala do interruptor; junto ao teletransportador 3 (à esquerda da porta Weapon Testing); ou junto ao teletransportador 2, à frente de duas latas."
+      },
+      {
+        "order": 9,
+        "section": "Escudo",
+        "title": "Construir o escudo",
+        "details": "Na bancada de Central Filing ou de Weapon Testing."
+      },
+      {
+        "order": 10,
+        "section": "Quest principal",
+        "title": "Janela dos Main Offices",
+        "details": "Interage 5 vezes com a janela fechada entre a Escargot e a perk Brew (espera que cada fala acabe). À 5.ª aparecem crawlers Nova 6: mata-os à faca."
+      },
+      {
+        "order": 11,
+        "section": "Quest principal",
+        "title": "Chave do War Room",
+        "details": "Descendo a escada da direita, à frente da Cola e da ICR-7, apanha a chave na caixinha à entrada da sala do Pack-a-Punch."
+      },
+      {
+        "order": 12,
+        "section": "Quest principal",
+        "title": "Código 1 — secretária trancada",
+        "details": "Nos Main Offices, abre a secretária trancada: mostra um mapa antigo de Zombies e um código de 4 dígitos. Os códigos variam por partida: anota o que aparece no teu jogo."
+      },
+      {
+        "order": 13,
+        "section": "Quest principal",
+        "title": "Código 2 — Weapon Testing",
+        "details": "Com a energia ligada, atira uma granada Frag ou Acid Bomb para trás do contentor com o sinal amarelo \"Attention\", junto ao teletransportador 3."
+      },
+      {
+        "order": 14,
+        "section": "Quest principal",
+        "title": "Código 3 — Panic Room",
+        "details": "Ativa Defcon 5 por esta ordem: War Room de cima (fundo, junto à Spitfire), Server Room, War Room de cima (segundo), War Room de baixo. Na Panic Room interage com a TV a piscar na fila de baixo da parede esquerda."
+      },
+      {
+        "order": 15,
+        "section": "Quest principal",
+        "title": "Código 4 — retratos em Groom Lake",
+        "details": "No corredor do piso de cima, dispara aos 4 retratos de presidentes com uma arma explosiva (por exemplo a pistola inicial com Pack-a-Punch). O guia admite que a ordem certa não está totalmente confirmada; sequências que costumam funcionar: Franklin, Lincoln, Hamilton, Franklin; ou Washington, Hamilton, Franklin, Lincoln."
+      },
+      {
+        "order": 16,
+        "section": "Quest principal",
+        "title": "Introduzir os 4 códigos",
+        "details": "No painel central do War Room de baixo, dispara aos números para os mudar e confirma, pela ordem: Shi No Numa, Der Riese, Shangri-La, Kino der Toten."
+      },
+      {
+        "order": 17,
+        "section": "Quest principal",
+        "title": "Winter's Howl",
+        "details": "Volta a Groom Lake e sobrevive 3 rondas sem sair. Abrem-se barricadas à esquerda do Pack-a-Punch com uma mala: apanha a Winter's Howl (o troféu só conta para quem a apanha).\nNota: as fontes não concordam se este é o easter egg principal do mapa ou um secundário."
+      }
+    ]
+  },
+  {
+    "id": "dead-of-the-night-main",
+    "map_id": "dead-of-the-night",
+    "name": "Dead of the Night — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "sources": [
+      "https://www.accelerated-ideas.com/news/dead-of-the-night-zombies-all-easter-egg-steps.aspx",
+      "https://segmentnext.com/black-ops-4-zombies-dead-of-the-night-easter-egg",
+      "https://gamerant.com/black-ops-4-dead-of-night-easter-egg-zombies/",
+      "https://www.newsweek.com/entertainment/video-games/call-duty-black-ops-4-zombies-dead-night-easter-egg-guide-full-walkthrough-1259108"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "section": "Preparação",
+        "title": "Ativar o Sentinel Artifact",
+        "details": "Interage com o artefacto junto à Grand Staircase (uma fonte diz do outro lado da ponte do North Atrium) para abrir o mapa."
+      },
+      {
+        "order": 2,
+        "section": "Pack-a-Punch",
+        "title": "Carregar os cristais",
+        "details": "Procura 3 vasos com fumo colorido (Master Bedroom, Study, Library, Wine Cellar, Trophy Room, Bedroom Hallway), parte-os à faca e mata zombies perto do cristal para o carregar."
+      },
+      {
+        "order": 3,
+        "section": "Pack-a-Punch",
+        "title": "Obter 3 diapasões",
+        "details": "Olha para cada cristal carregado: mostra um objeto do mapa (relógio, retrato, boneca, corda, pergaminho, perk...). Vai lá e cumpre o desafio — ficar num círculo a matar zombies, matar os vampiros, ou seguir um fantasma até uma campa. Cada desafio dá um diapasão (Tuning Fork)."
+      },
+      {
+        "order": 4,
+        "section": "Pack-a-Punch",
+        "title": "Abrir a floresta",
+        "details": "Com os 3 diapasões, abre a passagem para a floresta (Forest Terrace; outra fonte fala da lama negra no portão do Cemetery) e limpa a zona para ativar o Pack-a-Punch."
+      },
+      {
+        "order": 5,
+        "section": "Escudo",
+        "title": "Placa principal",
+        "details": "East Balcony (à esquerda da Saug 9mm); pilar da Grand Staircase à direita do artefacto; ou fim da parede do West Balcony."
+      },
+      {
+        "order": 6,
+        "section": "Escudo",
+        "title": "Janela do escudo",
+        "details": "Study (mesa à direita da entrada do Billiards); Library (estante partida ao canto); ou Library (sofá que bloqueia a escada)."
+      },
+      {
+        "order": 7,
+        "section": "Escudo",
+        "title": "Contra-placa",
+        "details": "East Hallway (cadeira ao canto); Dining Room (à direita do bar); ou Dining Room (à esquerda da porta da Greenhouse)."
+      },
+      {
+        "order": 8,
+        "section": "Escudo",
+        "title": "Construir o escudo",
+        "details": "Na bancada do Smoking Room."
+      },
+      {
+        "order": 9,
+        "section": "Armas",
+        "title": "Alistair's Folly",
+        "details": "Encontra os 4 símbolos coloridos perto das perks (azul: Cemetery/Mausoleum; verde: Greenhouse Terrace/Gardens; amarelo: Forest Terrace; vermelho: Master Bedroom, East Gallery, Wine Cellar ou Dining Room) e introduz os códigos na máquina por baixo da Folly na Library. Também pode sair da Mystery Box."
+      },
+      {
+        "order": 10,
+        "section": "Armas",
+        "title": "Prata",
+        "details": "Troféu/taça (Dining Room ou Library/West Hallway), castiçal (Entrance Hall, Billiards ou Wine Cellar/Main Hall) e prato (Wine Cellar). Derrete-os na bancada da Wine Cellar."
+      },
+      {
+        "order": 11,
+        "section": "Armas",
+        "title": "Pólvora e balas de prata",
+        "details": "Carvão (lareira do Main Hall, ou Billiards / Master Bedroom), guano de morcego (Cemetery / Mausoleum) e enxofre (Greenhouse Laboratory). Faz as balas de prata na bancada da Library."
+      },
+      {
+        "order": 12,
+        "section": "Armas",
+        "title": "Chaos Theory",
+        "details": "Mata um lobisomem com balas de prata e leva o material que larga à máquina do Greenhouse Laboratory para obter Prima Materia. Na Library, bate com o escudo no livro com o símbolo dourado para abrir uma sala secreta com uma peça. Monta o upgrade na bancada do Greenhouse Lab."
+      },
+      {
+        "order": 13,
+        "section": "Armas",
+        "title": "Alistair's Annihilator",
+        "details": "Junta 4 bílis de vampiro (mata vampiros com tiros carregados da Chaos Theory); mata o vampiro vermelho da campa a brilhar no Cemetery; apaga as lanternas laranja do Mausoleum, uma a seguir à outra, até aparecer o morcego gigante e mata-o (as fontes divergem: 5 lanternas no Mausoleum vs 4 atrás da Mystery Box). Transforma os materiais em Prima Materia na máquina. Na floresta, dispara tiros carregados a zombies junto aos montes de terra até um desenterrar a última peça. Monta no Greenhouse Lab."
+      },
+      {
+        "order": 14,
+        "section": "Quest principal",
+        "title": "Efígie: paus e campa de 1912",
+        "details": "No Cemetery, dispara aos 5 ramos com folhas a cair e apanha os paus. Interage com a campa com o ano de morte 1912 (em equipa, quem tiver o Annihilator): esse jogador entra em modo espírito."
+      },
+      {
+        "order": 15,
+        "section": "Quest principal",
+        "title": "Efígie: espantalho e fantasma",
+        "details": "Dispara um tiro carregado do Annihilator ao chão em frente ao espantalho para o incendiar e o jogador espírito entra no fogo (fica invisível). Encontra a mulher fantasma na mansão e escolta-a até ao espantalho. Interage com a laje que cai, sobrevive ao cerco no Cemetery e apanha a laje."
+      },
+      {
+        "order": 16,
+        "section": "Quest principal",
+        "title": "Telescópio: raio e espelhos",
+        "details": "Todos disparam ao mesmo tempo à vara metálica no topo do Mausoleum (balas de prata). Na ponte do North Atrium, roda os 3 mostradores até a luz chegar ao fundo da sala: a cabeça do Atlas parte-se."
+      },
+      {
+        "order": 17,
+        "section": "Quest principal",
+        "title": "Telescópio: símbolos do zodíaco",
+        "details": "Encontra 3 símbolos do zodíaco e conta os riscos na mesma sala (Entrance Hall, Billiards, Wine Cellar, Library, Trophy Room, Study, Dining Room, Main Hall...). No Greenhouse Laboratory, introduz-os do menor para o maior número de riscos."
+      },
+      {
+        "order": 18,
+        "section": "Quest principal",
+        "title": "Telescópio: cúpula",
+        "details": "Abre a cúpula com a manivela e mantém-na aberta batendo com o escudo. Passa com o escudo na armadilha elétrica do Greenhouse Lab e, todos juntos, batam no telescópio. Apanha a segunda laje."
+      },
+      {
+        "order": 19,
+        "section": "Quest principal",
+        "title": "Cavaleiro: escudo com fogo azul",
+        "details": "Põe um núcleo de fogo numa armadilha de fogo (Library), dispara-lhe um tiro carregado do Annihilator para ficar azul e passa por ela com o escudo."
+      },
+      {
+        "order": 20,
+        "section": "Quest principal",
+        "title": "Cavaleiro: lareiras",
+        "details": "Acende 3 conjuntos de 4 lareiras com o escudo, sem demorar: (1) Smoking Room, Library direita, Library esquerda, Billiards; (2) Main Hall leste, East Gallery, Main Hall oeste, West Gallery; (3) Trophy Room, Master Bedroom, Music Room, Dining Room. Cada conjunto dá uma gema/núcleo.\nUma fonte tem um conjunto 2 diferente."
+      },
+      {
+        "order": 21,
+        "section": "Quest principal",
+        "title": "Cavaleiro: estátuas e floresta",
+        "details": "Leva cada núcleo às estátuas de cavaleiro (entrada do Cemetery, Gardens e Main Hall) e escolta as orbes até ao símbolo da mesma cor na floresta. Quando os cavaleiros se afundarem, interagem todos no símbolo e sobrevivem ao cerco. Mata um lobisomem dentro do triângulo dos cavaleiros para a terceira laje."
+      },
+      {
+        "order": 22,
+        "section": "Boss final",
+        "title": "Lobisomem",
+        "details": "Entra pela roda/porta de pedra na floresta (leva balas de prata e Monkey Bombs). Roda os cristais das 3 estátuas até os raios ficarem verdes no ladrilho verde e atrai o lobisomem invisível para lá; dispara quando aparecer. Sobrevive à vaga, depois repete com o ladrilho escondido. Com dano suficiente começa a cena final (troféu \"Trial by Ordeal\")."
+      }
+    ]
+  },
+  {
+    "id": "ancient-evil-main",
+    "map_id": "ancient-evil",
+    "name": "Ancient Evil — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "sources": [
+      "https://www.accelerated-ideas.com/news/ancient-evil-zombies-easter-egg-guide.aspx",
+      "https://segmentnext.com/black-ops-4-zombies-ancient-evil-easter-egg-steps-guide",
+      "https://www.newsweek.com/entertainment/video-games/black-ops-4-zombies-ancient-evil-easter-egg-guide-walkthrough-1380164"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "section": "Pack-a-Punch",
+        "title": "Pegasus e Golden Bridle",
+        "details": "Apanha a Golden Bridle num pedestal em Intersection of Treasuries ou em Stoa of the Athenians para poderes usar o Pegasus."
+      },
+      {
+        "order": 2,
+        "section": "Pack-a-Punch",
+        "title": "Libertar as 2 águias",
+        "details": "Voa até Python Pass, dispara à jaula suspensa para a deixar cair e liberta a águia com a arma de especialista (aparece um Gegenees). Faz o mesmo em Cliff Ruins. Em Center of the World, espera que as águias abram o Pack-a-Punch."
+      },
+      {
+        "order": 3,
+        "section": "Escudo",
+        "title": "Peça do Gegenees",
+        "details": "Cai de um dos gigantes de vários braços (Gegenees)."
+      },
+      {
+        "order": 4,
+        "section": "Escudo",
+        "title": "Peça de Intersection / Stoa",
+        "details": "Intersection of Treasuries (junto ao canteiro ou à estátua do carro) ou Stoa of the Athenians (pilar vermelho)."
+      },
+      {
+        "order": 5,
+        "section": "Escudo",
+        "title": "Peça de Upper Road",
+        "details": "No corrimão da ponte, numa rocha debaixo da ponte ou numa rocha junto às escadinhas."
+      },
+      {
+        "order": 6,
+        "section": "Escudo",
+        "title": "Construir o Apollo's Will",
+        "details": "Na bancada do Marketplace, ao lado da 9mm."
+      },
+      {
+        "order": 7,
+        "section": "Pegasus Strike",
+        "title": "Peças e montagem",
+        "details": "Pontas: River of Sorrow. Martelo: Python Pass. Bigorna: Cliff Ruins. Monta na forja de Cliff Ruins. Também pode sair da Mystery Box."
+      },
+      {
+        "order": 8,
+        "section": "Manoplas",
+        "title": "Mãos dormentes",
+        "details": "Bate em vasos/montes de terra com brilho roxo (há ~20 sítios, só 4 ativos) para apanhar mãos dormentes. O Oráculo no spawn dá pistas."
+      },
+      {
+        "order": 9,
+        "section": "Manoplas",
+        "title": "Hand of Charon",
+        "details": "Põe a mão no altar de Charon (Python Pass) e mata os zombies vermelhos. Para redimir: mata zombies com ela no River of Sorrow, bebe do rio e encontra 3 moedas verdadeiras entre as falsas (fazem som). Leva-as ao altar, entra no portal e sobrevive."
+      },
+      {
+        "order": 10,
+        "section": "Manoplas",
+        "title": "Hand of Ouranos",
+        "details": "Altar em Center of the World. Para redimir: com tiros carregados projeta zombies contra as 3 setas gigantes (Center of the World, Python Pass, Cliff Ruins) para ganhar penas azuis. Leva-as ao altar e completa o portal."
+      },
+      {
+        "order": 11,
+        "section": "Manoplas",
+        "title": "Hand of Hemera",
+        "details": "Altar no Monument of Craterus. Para redimir: orienta os 3 espelhos/escudos dourados para que o tiro carregado acerte na taça e leva a carga de volta ao altar.\nAs fontes divergem nos sítios dos espelhos (Upper Road vs Temple Terrace / Upper Road / Gym Bathhouse)."
+      },
+      {
+        "order": 12,
+        "section": "Manoplas",
+        "title": "Hand of Gaia",
+        "details": "Altar no Spartan Monument. Para redimir: dispara às plantas de folhas vermelhas (Temple Terrace, Intersection, Stoa) até largarem rebentos; leva 3 ao altar e completa o portal."
+      },
+      {
+        "order": 13,
+        "section": "Quest principal",
+        "title": "Artefacto do anfiteatro",
+        "details": "Sai do Temple of Apollo para o Amphitheater, encontra a estátua do rei atrás da estátua sem cabeça e interage com o artefacto pendurado no braço. Sobrevive ao cerco."
+      },
+      {
+        "order": 14,
+        "section": "Quest principal",
+        "title": "Tributos ao Oráculo",
+        "details": "Entrega cerca de 6 tributos até a chama em frente à estátua do Temple of Apollo ficar azul e em espiral."
+      },
+      {
+        "order": 15,
+        "section": "Quest principal",
+        "title": "Chama e manchas de óleo",
+        "details": "Bate na chama azul com a lança (outra fonte: escudo) e, sem trocar de arma, acende as 3 manchas de óleo coloridas: Intersection (parede junto à tenda vermelha), Spartan Monument (parede junto à estátua) e Upper Road (rocha entre as estátuas)."
+      },
+      {
+        "order": 16,
+        "section": "Quest principal",
+        "title": "Estátuas espartanas",
+        "details": "No Spartan Monument, com a Redeemed Hand of Charon, dispara um tiro carregado ao chão e destrói as estátuas com olhos a brilhar."
+      },
+      {
+        "order": 17,
+        "section": "Quest principal",
+        "title": "Alinhar as engrenagens",
+        "details": "Rebenta as 3 paredes com brilho azul (Spartan Monument; Intersection atrás da tenda vermelha; Intersection à esquerda da Auger) e encrava a lança na engrenagem pequena quando alinhar com a grande. Depois, em Stoa, atira a lança em chamas ao pilar do meio quando as estátuas estiverem viradas para dentro."
+      },
+      {
+        "order": 18,
+        "section": "Quest principal",
+        "title": "Ra e o cetro",
+        "details": "Faz um Gegenees partir o cristal vermelho de Intersection com o escudo e põe o objeto na estátua de Ra (Gymnasium Bathhouse). Dá-lhe a Redeemed Hand of Hemera e mantém o raio ~45 s contra os esqueletos. Apanha o cetro na sala secreta e devolve-o a Ra."
+      },
+      {
+        "order": 19,
+        "section": "Quest principal",
+        "title": "Vinhas e relógio de sol",
+        "details": "Em Offering of the Attalids (perto da Danu), usa a Redeemed Hand of Gaia nas vinhas negras e acerta nas 3 vinhas seguidas: aparece um gigante com a vara. Põe-na no relógio de sol, mata os zombies elétricos em cima dele e pára os anéis interiores quando os símbolos azuis alinharem (2 vezes)."
+      },
+      {
+        "order": 20,
+        "section": "Quest principal",
+        "title": "Hit Your Marks",
+        "details": "No anfiteatro, cada jogador fica na cor da sua manopla; quando aparecerem cores novas, quem tiver a cor certa mata os zombies destacados com a manopla. Repete as vezes pedidas."
+      },
+      {
+        "order": 21,
+        "section": "Quest principal",
+        "title": "Porta do River of Sorrow",
+        "details": "Na porta junto à Spitfire, dispara aos símbolos por esta ordem: \"14\", círculo com risco vertical, \"a\" (6 inclinado), \"o\", três círculos em pirâmide, triângulo invertido. O jogador Shaw interage com a porta."
+      },
+      {
+        "order": 22,
+        "section": "Quest principal",
+        "title": "Balista e lança verde",
+        "details": "Usa o Pegasus Strike no símbolo azul da escadaria do River of Sorrow: aparece uma balista. Roda-a com tiros carregados da Hand of Ouranos até apontar para a serpente/Python. Passa a lança pela chama azul e pela armadilha de veneno para ficar verde e bate com ela na balista."
+      },
+      {
+        "order": 23,
+        "section": "Boss final",
+        "title": "Pegasus corrompido e Perseus",
+        "details": "Entra pelo ovo em chamas em Center of the World. Fase 1: abate o Pegasus com wonder weapons e especialistas, saindo das ilhas que ele destrói. Fase 2: evita os raios (ele teletransporta-se para onde caem), põe-no de joelhos e castiga-o com wonder weapons. Ao morrer larga uma chave e começa a cena final (troféu \"Greek Tragedy\")."
+      }
+    ]
+  },
+  {
+    "id": "alpha-omega-main",
+    "map_id": "alpha-omega",
+    "name": "Alpha Omega — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "sources": [
+      "https://segmentnext.com/black-ops-4-zombies-alpha-omega-easter-egg-steps-guide/",
+      "https://gameranx.com/features/id/176567/article/black-ops-4-zombies-alpha-omega-complete-easter-egg-guide-how-to-fight-the-final-boss/",
+      "https://gameranx.com/features/id/176505/article/black-ops-4-zombies-alpha-omega-how-to-build-the-riot-shield-part-locations-guide/",
+      "https://gameranx.com/features/id/176563/article/black-ops-4-zombies-alpha-omega-how-to-unlock-telepads-portal-parts-guide/",
+      "https://casualgamer.com/?p=1836"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "section": "Preparação",
+        "title": "Requisito: jogar online",
+        "details": "A quest só funciona online e sem modificadores; o Rushmore não responde offline."
+      },
+      {
+        "order": 2,
+        "section": "Preparação",
+        "title": "Ligar a energia",
+        "details": "Nos Generators, carrega no painel junto ao manequim e sobrevive ao cerco."
+      },
+      {
+        "order": 3,
+        "section": "Pack-a-Punch",
+        "title": "Reparar a fuga de gás Nova",
+        "details": "Repara os ventiladores/válvulas de gás em 4 das casas. O Pack-a-Punch fica a funcionar no bunker (Beds)."
+      },
+      {
+        "order": 4,
+        "section": "Escudo",
+        "title": "Base",
+        "details": "Cul-de-Sac: encostada ao carro verde na garagem da Green House, ou à frente do autocarro destruído."
+      },
+      {
+        "order": 5,
+        "section": "Escudo",
+        "title": "Janela",
+        "details": "Bunker (Beds): junto a uma cómoda perto do túnel do Lounge, na estante metálica perto do túnel dos Generators, ou num sofá às bolinhas."
+      },
+      {
+        "order": 6,
+        "section": "Escudo",
+        "title": "Pega",
+        "details": "Operations: na secretária por baixo dos monitores junto às escadas, ou no chão da garagem encostada aos arquivadores."
+      },
+      {
+        "order": 7,
+        "section": "Escudo",
+        "title": "Construir o escudo",
+        "details": "Na bancada do quarto do primeiro andar da Green House."
+      },
+      {
+        "order": 8,
+        "section": "Telepads e Ray Gun Mk II",
+        "title": "Amplificadores dos telepads",
+        "details": "Peças: Transfusion Facility, Green House e sala dos Generators. Monta na bancada do APD Control (dá 2 amplificadores)."
+      },
+      {
+        "order": 9,
+        "section": "Telepads e Ray Gun Mk II",
+        "title": "Ray Gun Mk II (opcional)",
+        "details": "Monta o kit na bancada do segundo andar de Operations (tubo na Yellow House, lata em Storage, líquido 115 em Solitary ou APD Control). Carrega as 4 TVs com estática (Diner, APD Control, Yellow House Backyard, Site Entrance) matando zombies perto; a ordem dos números forma o código para o teclado do Rushmore. Não é obrigatória para a quest."
+      },
+      {
+        "order": 10,
+        "section": "Quest principal",
+        "title": "Rushmore: 4 códigos",
+        "details": "Interage com o Rushmore (primeiro andar de Operations). Códigos: secretária de Operations junto ao soldado de brinquedo; gaveta da secretária de cima da Yellow House (chave em Solitary); APD Interrogation (uma de três posições); folhas de papel a disparar no APD Control."
+      },
+      {
+        "order": 11,
+        "section": "Quest principal",
+        "title": "Relógios das casas",
+        "details": "Apanha os Galvaknuckles na carrinha do Cul-de-Sac. Mata um zombie junto à TV acesa no bunker e lê a letra + 4 dígitos; acerta o relógio da casa com essa letra. Repete e, na casa sem letra, bate no relógio com os Galvaknuckles: introduz no Rushmore a hora onde parar. Tudo na mesma ronda."
+      },
+      {
+        "order": 12,
+        "section": "Quest principal",
+        "title": "Escoltar o crawler Nova 6",
+        "details": "Interage com o Rushmore: aparece um crawler vermelho no bunker. Protege-o até à Transfusion Facility. Se morrer, uma fonte diz que reaparece na ronda seguinte."
+      },
+      {
+        "order": 13,
+        "section": "Quest principal",
+        "title": "Canister 115 do Marlton",
+        "details": "Em Storage, liberta o A.D.A.M. (grátis a primeira vez, depois 3000) e leva-o ao corredor entre a Green House Backyard e o Diner; bate na porta metálica. Põe o canister na prateleira da Transfusion Facility e volta ao Rushmore."
+      },
+      {
+        "order": 14,
+        "section": "Quest principal",
+        "title": "Núcleo de energia",
+        "details": "Põe os amplificadores nos telepads da Power House e da Site Entrance. Tira o núcleo da Power House, faz um crawler elétrico carregá-lo e entrega-o em Operations antes do tempo acabar (usa os telepads; Stamina-Up ajuda)."
+      },
+      {
+        "order": 15,
+        "section": "Quest principal",
+        "title": "Quadros",
+        "details": "Leva zombies com Brain Rot até aos 3 quadros com gás verde para os derrubar, anota os códigos atrás e introduz-os rapidamente no Rushmore. As fontes divergem nos sítios dos quadros."
+      },
+      {
+        "order": 16,
+        "section": "Quest principal",
+        "title": "Restaurar a energia",
+        "details": "Depois do monólogo do Rushmore a energia vai abaixo. Liga os 6 interruptores por esta ordem: Storage (baixo), Generator (cima), Solitary (baixo), Beds (cima), Diner (cima), Lounge (baixo)."
+      },
+      {
+        "order": 17,
+        "section": "Quest principal",
+        "title": "Manequins e orbe elemental",
+        "details": "Interage (todos) com os manequins de peito azul e defende-os para recolher 2 braços e uma cabeça; monta-os no manequim do APD Interrogation. Escolta a orbe elemental azul até lá. Volta ao Rushmore e inicia a sequência no APD Control."
+      },
+      {
+        "order": 18,
+        "section": "Boss final",
+        "title": "Avogadro",
+        "details": "Mata manequins junto ao Soul Canister até encher e liberta o Avogadro. No bunker, carrega os 4 canisters (Storage, Beds, Lounge, Diner), todos no mesmo de cada vez; o escudo absorve os choques. De volta ao APD Control, empurra-o com tiros e Galvaknuckles até à porta do APD e recolhe o Elemental Shard (troféu \"Electromagnetic Awakening Party\")."
+      }
+    ]
+  },
+  {
+    "id": "tag-der-toten-main",
+    "map_id": "tag-der-toten",
+    "name": "Tag der Toten — Main Quest",
+    "type": "main",
+    "min_players": null,
+    "max_players": null,
+    "verified": false,
+    "sources": [
+      "https://segmentnext.com/black-ops-4-tag-der-toten-easter-egg-guide",
+      "https://gamerant.com/call-of-duty-black-ops-4-tag-der-toten-easter-egg-guide/",
+      "https://www.gfinityesports.com/article/tag-der-toten-how-to-unlock-the-golden-pack-a-punch-machine-guide-and-access-the-zipline-facility-in-black-ops-4-s-dlc-4-call-of-the-dead-remake",
+      "https://www.gfinityesports.com/article/tag-der-toten-how-to-build-the-riot-shield-in-black-ops-4-s-dlc-4-call-of-the-dead-remake/",
+      "https://www.gfinityesports.com/article/tag-der-toten-how-to-get-a-free-wunderwaffe-in-black-ops-4-s-dlc-4-call-of-the-dead-remake"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "section": "Preparação",
+        "title": "Ligar os 2 primeiros geradores",
+        "details": "Um no spawn (à tua frente) e outro na ponte de comando do navio (Bridge)."
+      },
+      {
+        "order": 2,
+        "section": "Pack-a-Punch",
+        "title": "Pedra azul e Pack-a-Punch",
+        "details": "Na gruta debaixo da cascata (Lighthouse Approach) apanha à faca a pedra azul brilhante e leva-a ao Hermit no topo do farol. Ele aponta o farol ao Pack-a-Punch congelado e derrete o gelo. O sítio do Pack-a-Punch muda.\nUma fonte acrescenta a caixa de velocidades (Navigation deck) que o Hermit repara."
+      },
+      {
+        "order": 3,
+        "section": "Pack-a-Punch",
+        "title": "Manivelas da tirolesa",
+        "details": "Encontra a manivela da Stern e a da Forecastle (3 sítios cada) e usa-as nos suportes do Sun Deck e do convés principal para posicionar as tirolesas."
+      },
+      {
+        "order": 4,
+        "section": "Pack-a-Punch",
+        "title": "Golden Pack-a-Punch",
+        "details": "O Hermit dá-te a pega da tirolesa. Usa a tirolesa atrás do farol até às instalações, liga o interruptor da Human Infusion e volta. Usa o lançador do Sun Deck para ir à ilha do Golden Pack-a-Punch (5000 pontos, tempo limitado e muitos zombies)."
+      },
+      {
+        "order": 5,
+        "section": "Escudo",
+        "title": "Corpo — spawn",
+        "details": "Encostado ao barco à esquerda do interruptor, numa bomba de gasolina, ou numa palete do lado esquerdo."
+      },
+      {
+        "order": 6,
+        "section": "Escudo",
+        "title": "Janela — Frozen Crevasse",
+        "details": "Nos montes à esquerda do spawn, na plataforma ao lado da Mystery Box, ou perto do Pack-a-Punch escondida na relva."
+      },
+      {
+        "order": 7,
+        "section": "Escudo",
+        "title": "Pega — farol",
+        "details": "Primeiro piso junto à entrada, segundo piso junto à janela/caixa de ferramentas, ou terceiro piso junto às escadas."
+      },
+      {
+        "order": 8,
+        "section": "Escudo",
+        "title": "Construir o escudo",
+        "details": "Na bancada da Lighthouse Station."
+      },
+      {
+        "order": 9,
+        "section": "Wunderwaffe",
+        "title": "Wunderwaffe grátis (opcional)",
+        "details": "Derrete o pingente de gelo com a chave (sobre a gruta da cascata, no corrimão do farol ou nas escadas do farol) na fogueira da Forecastle. Nas instalações, abre o cofre da Specimen Storage, mata 10 zombies para carregar o aparelho Vril e leva-o ao Hermit. Com a chave que ele dá, abre o baú atrás de ti. Também sai da Mystery Box; precisas dela para a quest."
+      },
+      {
+        "order": 10,
+        "section": "Quest principal",
+        "title": "Totens de desafios",
+        "details": "Completa os desafios do Hermit nos espantalhos até teres os 2 totens (3 desafios cada). Volta ao Hermit e recolhe os mostradores no elevador de serviço."
+      },
+      {
+        "order": 11,
+        "section": "Quest principal",
+        "title": "Mostradores da Artifact Storage",
+        "details": "Na sala de controlo de cima da Artifact Storage, roda os 4 mostradores até acenderem, segundo os números coloridos nas paredes: roxo na Stern, amarelo no Sun Deck, azul no Cargo Hold, laranja na Forecastle."
+      },
+      {
+        "order": 12,
+        "section": "Quest principal",
+        "title": "Oferendas ao Apothicon",
+        "details": "Ativa as legendas: a voz dá pistas para ossos/carne espalhados pelo mapa (ex.: \"Where Crows Roost\" = barris da Forecastle; \"Where Helixes Peak\" = topo do farol). Entrega as oferendas."
+      },
+      {
+        "order": 13,
+        "section": "Quest principal",
+        "title": "Selo da Dualidade",
+        "details": "Faz dinamite com as partes de 3 zombies de fogo congelados. Bate no quadro/cartaz indicado pelo Apothicon (Specimen Storage, Boathouse, Ice Grotto ou Geological Processing), rebenta o cofre e tira o selo."
+      },
+      {
+        "order": 14,
+        "section": "Quest principal",
+        "title": "Orbes de sangue",
+        "details": "Põe o selo por baixo do sangue do Apothicon na Artifact Storage. Dispara à orbe vermelha: sai uma amarela; acerta-lhe com uma bola de neve para ficar azul e dispara-lhe para voltar. 3 vezes."
+      },
+      {
+        "order": 15,
+        "section": "Quest principal",
+        "title": "Caixa de música da Samantha",
+        "details": "Leva o selo à fogueira do Sunken Path. Apanha os 2 cartões (Decontamination e Specimen Storage), passa-os no painel do Security Lobby com a Human Infusion ligada, e insere-os dos dois lados do cofre da Human Infusion. Sobrevive ao cerco e tira a caixa de música."
+      },
+      {
+        "order": 16,
+        "section": "Quest principal",
+        "title": "Pedras-sabão e fusível",
+        "details": "Recolhe as pedras-sabão no elevador do Hermit. Infunde uma na armadilha de fogo (Lighthouse Annex) e outra na de gelo (entre o Upper Catwalk e Decontamination). Põe-nas no aparelho Agarthan e tira o fusível do centro."
+      },
+      {
+        "order": 17,
+        "section": "Quest principal",
+        "title": "Fragmento elemental",
+        "details": "Põe o fusível na porta trancada da Lighthouse Station. Dispara aos 2 geradores/postes com a Wunderwaffe e mata os 3 zombies elétricos (Boathouse, Lighthouse Approach junto à MX9, plataforma de cima da Lighthouse Station). A porta abre: apanha o fragmento."
+      },
+      {
+        "order": 18,
+        "section": "Quest principal",
+        "title": "Carregar o aparelho Agarthan",
+        "details": "Põe o fragmento por baixo da orbe na Artifact Storage e repete as orbes e a caixa de música. Leva o aparelho aos 4 sítios indicados pelo farol (Beach, Sunken Path, Boathouse, Lagoon) e carrega-o com kills. Entrega-o ao Hermit e sobrevive ao cerco."
+      },
+      {
+        "order": 19,
+        "section": "Quest principal",
+        "title": "Ilha do Golden Pack-a-Punch",
+        "details": "Lança-te do Sun Deck para a ilha, mata zombies junto à orbe vermelha até o céu ficar vermelho e acompanha a orbe com o aparelho até à Human Infusion, sem sair do círculo e evitando a lava."
+      },
+      {
+        "order": 20,
+        "section": "Boss final",
+        "title": "Final",
+        "details": "No topo do navio (Sun Deck) interage com a orbe amarela e depois com o aparelho Agarthan na Forecastle para terminar a história Aether.\nAs fontes divergem neste último passo (uma diz para devolver o aparelho ao Hermit)."
+      }
+    ]
+  }
+]
