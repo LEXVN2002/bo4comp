@@ -330,12 +330,12 @@ Cada fase só começa quando todos os critérios da anterior estão marcados.
 
 **Fase 1: MVP manual**
 
-- [ ] Monorepo criado, `pnpm dev` arranca a app web sem erros
-- [ ] Migrações aplicadas, RLS ativo e testado com dois utilizadores diferentes
-- [ ] `pnpm seed` valida os JSON com Zod e gera `seed.sql` idempotente
-- [ ] Os seis ecrãs funcionam no desktop e no telemóvel
-- [ ] Registar uma sessão atualiza os contadores de camos corretamente (teste unitário da lógica de progresso)
-- [ ] Exportar e importar progresso em JSON sem perda de dados
+- [x] Monorepo criado, `pnpm dev` arranca a app web sem erros
+- [x] Migrações aplicadas, RLS ativo e testado com dois utilizadores diferentes
+- [x] `pnpm seed` valida os JSON com Zod e gera `seed.sql` idempotente
+- [x] Os seis ecrãs funcionam no desktop e no telemóvel
+- [x] Registar uma sessão atualiza os contadores de camos corretamente (teste unitário da lógica de progresso)
+- [x] Exportar e importar progresso em JSON sem perda de dados
 - [ ] Deploy no Netlify
 
 **Fase 2: sync API**
