@@ -20,6 +20,8 @@ export interface CamoPattern {
   hueA: number;
   hueB: number;
   angle: number;
+  /** Cores base (também usadas no cartão de partilha, em canvas). */
+  colors: { a: string; b: string; c: string };
   style: CSSProperties;
 }
 
@@ -29,9 +31,10 @@ export function camoPattern(id: string): CamoPattern {
   const hueA = (h >>> 3) % 360;
   const hueB = (hueA + 40 + ((h >>> 12) % 140)) % 360;
   const angle = ((h >>> 20) % 8) * 22.5;
-  const a = `hsl(${hueA} 55% 42%)`;
-  const b = `hsl(${hueB} 60% 30%)`;
-  const c = `hsl(${hueA} 45% 18%)`;
+  // Sintaxe com vírgulas: aceite pelo CSS e pelo fillStyle do canvas em todos os browsers.
+  const a = `hsl(${hueA}, 55%, 42%)`;
+  const b = `hsl(${hueB}, 60%, 30%)`;
+  const c = `hsl(${hueA}, 45%, 18%)`;
 
   let style: CSSProperties;
   switch (kind) {
@@ -68,5 +71,5 @@ export function camoPattern(id: string): CamoPattern {
       };
       break;
   }
-  return { kind, hueA, hueB, angle, style };
+  return { kind, hueA, hueB, angle, colors: { a, b, c }, style };
 }

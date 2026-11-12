@@ -7,6 +7,7 @@ import { ClosestToUnlock } from '../features/camos/ClosestToUnlock';
 import { PinnedWeapons } from '../features/camos/PinnedWeapons';
 import { useCamoProgress } from '../features/camos/queries';
 import { useCamoData } from '../features/camos/useCamoData';
+import { globalCardInput, ShareButton } from '../features/share/ShareCard';
 import { useCatalog } from '../features/catalog/queries';
 import { useBestRounds, useRecentSessions } from '../features/dashboard/queries';
 import { useCompletions, useEasterEggs } from '../features/easter-eggs/queries';
@@ -52,7 +53,10 @@ export default function Dashboard() {
 
   return (
     <section className="space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight">Painel</h1>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h1 className="text-2xl font-semibold tracking-tight">Painel</h1>
+        <ShareButton build={(name) => globalCardInput(camoData.data!, name)} />
+      </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
         <StatCard

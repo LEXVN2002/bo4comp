@@ -91,6 +91,7 @@ export default function Settings() {
     <section className="mx-auto max-w-2xl space-y-6">
       <h1 className="text-2xl font-semibold tracking-tight">Definições</h1>
 
+      <PlayerNameSettings />
       <SoundSettings />
 
       <section className="card space-y-3 p-4" aria-labelledby="export-title">
@@ -263,6 +264,71 @@ function SoundSettings() {
             Testar animação
           </button>
         </div>
+      )}
+    </section>
+  );
+}
+
+function PlayerNameSettings() {
+  const settings = useUserSettings();
+  const save = useSaveUserSettings();
+  if (!settings.data) return null;
+  return <PlayerNameField current={settings.data} save={save} />;
+}
+
+function PlayerNameField({
+  current,
+  save,
+}: {
+  current: NonNullable<ReturnType<typeof useUserSettings>['data']>;
+  save: ReturnType<typeof useSaveUserSettings>;
+}) {
+  const [name, setName] = useState(current.player_name ?? '');
+  const [saved, setSaved] = useState(false);
+
+  function commit() {
+    const value = name.trim() || null;
+    if (value === current.player_name) return;
+    save.mutate({ ...current, player_name: value }, { onSuccess: () => setSaved(true) });
+  }
+
+  return (
+    <section className="card space-y-3 p-4" aria-labelledby="player-title">
+      <h2 id="player-title" className="font-semibold">
+        Nome de jogador
+      </h2>
+      <p className="text-sm text-zinc-400">Aparece no cartão de progresso para partilhar.</p>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          commit();
+        }}
+        className="flex gap-2"
+      >
+        <label className="flex-1">
+          <span className="sr-only">Nome de jogador</span>
+          <input
+            type="text"
+            maxLength={40}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              setSaved(false);
+            }}
+            onBlur={commit}
+            placeholder="Ex.: o teu gamertag"
+            className="input"
+          />
+        </label>
+        <button type="submit" disabled={save.isPending} className="btn-secondary">
+          Guardar
+        </button>
+      </form>
+      {saved && !save.isPending && <p className="text-xs text-emerald-400">Guardado</p>}
+      {save.isError && (
+        <p role="alert" className="text-sm text-red-400">
+          Não foi possível guardar: {describeError(save.error)}
+        </p>
       )}
     </section>
   );

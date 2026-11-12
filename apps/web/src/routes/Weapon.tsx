@@ -7,6 +7,7 @@ import { CamoSwatch, CompleteSeal, NotesField, PinButton } from '../features/cam
 import { CamoPanelHost } from '../features/camos/CamoPanelHost';
 import { moveIndex, SHORTCUT_HELP, shortcutFor } from '../features/camos/shortcuts';
 import { useCamoActions } from '../features/camos/useCamoActions';
+import { ShareButton, weaponCardInput } from '../features/share/ShareCard';
 import { useCamoData, type CamoData } from '../features/camos/useCamoData';
 import { useSaveWeaponNote, useTogglePin, useWeaponNote } from '../features/camos/userData';
 import type { CamoRow, WeaponRow } from '../features/catalog/queries';
@@ -132,6 +133,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
             {summary.total > 0 && summary.unlocked === summary.total && <CompleteSeal />}
           </h1>
           <div className="flex items-center gap-2">
+            <ShareButton build={(name) => weaponCardInput(weapon, data, name)} />
             <button
               type="button"
               onClick={() => helpRef.current?.showModal()}
