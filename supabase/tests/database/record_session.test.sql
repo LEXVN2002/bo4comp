@@ -18,7 +18,11 @@ insert into public.weapons (id, name, weapon_class, source) values
 
 -- Substituir o catálogo de camos (a transação é revertida no fim).
 -- Independente do estado da base de dados (tudo é revertido no fim).
+-- Tudo o que referencia camos tem de sair antes (dados de desenvolvimento locais incluídos).
 delete from public.weapon_camo_progress;
+delete from public.user_camo_overrides;
+delete from public.camo_notes;
+delete from public.goals;
 delete from public.camos;
 insert into public.camos (id, name, tier, kind, requirement_type, requirement_value, requirement_text, verified) values
   ('c-kills',   'Kills 10',     1, 'zombies', 'kills',      10,   'teste', true),
