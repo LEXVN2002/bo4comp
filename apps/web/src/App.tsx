@@ -8,6 +8,7 @@ import Dashboard from './routes/Dashboard';
 import EditSession from './routes/EditSession';
 import EasterEggs from './routes/EasterEggs';
 import Login from './routes/Login';
+import MasterGrid from './routes/MasterGrid';
 import NewSession from './routes/NewSession';
 import NotFound from './routes/NotFound';
 import Sessions from './routes/Sessions';
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Dashboard /> },
       { path: '/camos', element: <Camos /> },
+      { path: '/camos/grelha', element: <MasterGrid /> },
       { path: '/camos/:weaponId', element: <Weapon /> },
       { path: '/easter-eggs', element: <EasterEggs /> },
       { path: '/sessions/new', element: <NewSession /> },

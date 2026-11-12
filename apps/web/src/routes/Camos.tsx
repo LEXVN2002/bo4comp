@@ -1,52 +1,61 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { ProgressBar } from '../components/ProgressBar';
 import { ErrorMessage, Loading } from '../components/QueryState';
-import { UnverifiedBadge } from '../components/UnverifiedBadge';
-import { useCatalog, type CamoRow } from '../features/catalog/queries';
-import { CamoEditor, type CamoEditorTarget } from '../features/camos/CamoEditor';
-import { useCamoProgress } from '../features/camos/queries';
-import { sortWeapons, weaponClassesOf } from '../features/camos/weapons';
-import { weaponClassLabel } from '../lib/labels';
+import { CompleteSeal, PinButton } from '../features/camos/CamoBits';
 import {
-  camoState,
-  formatPercent,
-  indexProgress,
-  overallCompletion,
-  progressKey,
-  weaponSummary,
-  type CamoState,
-} from '../lib/progress';
+  filterWeapons,
+  filtersToParams,
+  parseFilters,
+  SORT_LABELS,
+  SORT_OPTIONS,
+  type WeaponListFilters,
+  type WeaponListItem,
+  type WeaponSort,
+} from '../features/camos/listFilters';
+import { useCamoData } from '../features/camos/useCamoData';
+import { useTogglePin } from '../features/camos/userData';
+import { weaponClassesOf } from '../features/camos/weapons';
+import type { CamoRow, WeaponRow } from '../features/catalog/queries';
+import { weaponClassLabel } from '../lib/labels';
+import { formatPercent, overallCompletion } from '../lib/progress';
+
+type Item = WeaponListItem<WeaponRow, CamoRow>;
 
 export default function Camos() {
-  const catalog = useCatalog();
-  const progress = useCamoProgress();
+  const { data, isPending, error, retry } = useCamoData();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [editing, setEditing] = useState<CamoEditorTarget | null>(null);
-  const classFilter = searchParams.get('classe');
+  const togglePin = useTogglePin();
 
-  const index = useMemo(() => indexProgress(progress.data ?? []), [progress.data]);
-  const allWeapons = useMemo(() => sortWeapons(catalog.data?.weapons ?? []), [catalog.data]);
-  const classes = useMemo(() => weaponClassesOf(allWeapons), [allWeapons]);
-  const weapons = classFilter ? allWeapons.filter((w) => w.weapon_class === classFilter) : allWeapons;
-
-  if (catalog.isPending || progress.isPending) return <Loading />;
-  if (catalog.isError) return <ErrorMessage error={catalog.error} onRetry={() => catalog.refetch()} />;
-  if (progress.isError) return <ErrorMessage error={progress.error} onRetry={() => progress.refetch()} />;
-
-  const camos = catalog.data.camos;
-  const completion = overallCompletion(
-    weapons.map((w) => w.id),
-    camos,
-    index,
+  const classes = useMemo(() => weaponClassesOf(data?.weapons ?? []), [data]);
+  const filters = useMemo(() => parseFilters(searchParams, classes), [searchParams, classes]);
+  const items = useMemo(
+    () => (data ? filterWeapons(data.weapons, data.camos, data.index, filters) : []),
+    [data, filters],
   );
 
-  function setClass(value: string | null) {
-    setSearchParams(value ? { classe: value } : {}, { replace: true });
+  if (isPending) return <Loading />;
+  if (error || !data) return <ErrorMessage error={error} onRetry={retry} />;
+
+  const completion = overallCompletion(
+    data.weapons.map((w) => w.id),
+    data.camos,
+    data.index,
+  );
+  const pinned = new Set(data.pinned);
+
+  function update(patch: Partial<WeaponListFilters>) {
+    setSearchParams(filtersToParams({ ...filters, ...patch }), { replace: true });
   }
 
+  // Agrupado por classe só na ordenação por nome; nas outras, a ordem é o que interessa.
+  const groups: { weaponClass: string | null; items: Item[] }[] =
+    filters.sort === 'nome'
+      ? groupByClass(items)
+      : [{ weaponClass: null, items }];
+
   return (
-    <section className="space-y-4">
+    <section className="space-y-5">
       <header className="space-y-3">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h1 className="text-2xl font-semibold tracking-tight">Camos</h1>
@@ -56,73 +65,151 @@ export default function Camos() {
           </p>
         </div>
         <ProgressBar value={completion.fraction} label="Progresso total de camos" />
+        <div className="flex justify-end">
+          <Link to="/camos/grelha" className="btn-secondary px-3 py-1.5">
+            Grelha mestra
+          </Link>
+        </div>
+      </header>
 
+      <div className="space-y-3">
         <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1" role="group" aria-label="Filtrar por classe">
-          <FilterChip active={!classFilter} onClick={() => setClass(null)}>
+          <FilterChip active={!filters.weaponClass} onClick={() => update({ weaponClass: null })}>
             Todas
           </FilterChip>
           {classes.map((c) => (
-            <FilterChip key={c} active={classFilter === c} onClick={() => setClass(c)}>
+            <FilterChip key={c} active={filters.weaponClass === c} onClick={() => update({ weaponClass: c })}>
               {weaponClassLabel(c)}
             </FilterChip>
           ))}
         </div>
-      </header>
 
-      {weapons.length === 0 ? (
-        <p className="text-sm text-zinc-400">Não há armas nesta classe.</p>
-      ) : (
-        <div className="card -mx-4 overflow-x-auto sm:mx-0">
-          <table className="w-max border-separate border-spacing-0 text-sm">
-            <thead>
-              <tr>
-                <th className="sticky left-0 z-10 bg-zinc-900 px-3 py-2 text-left font-medium text-zinc-400">
-                  Arma
-                </th>
-                {camos.map((camo) => (
-                  <CamoHeader key={camo.id} camo={camo} />
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {weapons.map((weapon) => {
-                const summary = weaponSummary(weapon.id, camos, index);
-                return (
-                  <tr key={weapon.id} className="group">
-                    <th
-                      scope="row"
-                      className="sticky left-0 z-10 border-t border-zinc-800 bg-zinc-900 px-3 py-1.5 text-left font-normal group-hover:bg-zinc-800"
-                    >
-                      <Link to={`/camos/${weapon.id}`} className="block hover:text-emerald-400">
-                        <span className="block whitespace-nowrap">{weapon.name}</span>
-                        <span className="block text-xs text-zinc-500">
-                          {summary.unlocked}/{summary.total}
-                        </span>
-                      </Link>
-                    </th>
-                    {camos.map((camo) => {
-                      const row = index.get(progressKey(weapon.id, camo.id));
-                      return (
-                        <td key={camo.id} className="border-t border-zinc-800 p-1 text-center">
-                          <CamoCell
-                            state={camoState(camo, row)}
-                            label={`${weapon.name}, ${camo.name}`}
-                            onClick={() => setEditing({ weapon, camo, progress: row })}
-                          />
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+        <div className="grid gap-2 sm:grid-cols-[1fr_auto_auto] sm:items-center">
+          <label className="block">
+            <span className="sr-only">Pesquisar arma</span>
+            <input
+              type="search"
+              value={filters.query}
+              onChange={(e) => update({ query: e.target.value })}
+              placeholder="Pesquisar arma…"
+              className="input"
+            />
+          </label>
+          <label className="flex items-center gap-2 text-sm text-zinc-300">
+            Ordenar por
+            <select
+              value={filters.sort}
+              onChange={(e) => update({ sort: e.target.value as WeaponSort })}
+              className="input w-auto py-1.5"
+            >
+              {SORT_OPTIONS.map((s) => (
+                <option key={s} value={s}>
+                  {SORT_LABELS[s]}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex cursor-pointer items-center gap-2 text-sm text-zinc-300">
+            <input
+              type="checkbox"
+              checked={filters.onlyIncomplete}
+              onChange={(e) => update({ onlyIncomplete: e.target.checked })}
+              className="size-4 accent-emerald-500"
+            />
+            Só incompletas
+          </label>
         </div>
-      )}
+      </div>
 
-      <Legend />
-      <CamoEditor target={editing} onClose={() => setEditing(null)} />
+      {items.length === 0 ? (
+        <p className="text-sm text-zinc-400">Nenhuma arma corresponde aos filtros.</p>
+      ) : (
+        groups.map((group) => (
+          <section key={group.weaponClass ?? 'todas'} className="space-y-2">
+            {group.weaponClass && (
+              <h2 className="text-sm font-medium tracking-wide text-zinc-400 uppercase">
+                {weaponClassLabel(group.weaponClass)}
+              </h2>
+            )}
+            <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {group.items.map((item) => (
+                <WeaponCard
+                  key={item.weapon.id}
+                  item={item}
+                  pinned={pinned.has(item.weapon.id)}
+                  showClass={filters.sort !== 'nome'}
+                  sort={filters.sort}
+                  onTogglePin={() =>
+                    togglePin.mutate({ weaponId: item.weapon.id, pinned: !pinned.has(item.weapon.id) })
+                  }
+                />
+              ))}
+            </ul>
+          </section>
+        ))
+      )}
     </section>
+  );
+}
+
+function groupByClass(items: Item[]): { weaponClass: string; items: Item[] }[] {
+  const groups: { weaponClass: string; items: Item[] }[] = [];
+  for (const item of items) {
+    const last = groups.at(-1);
+    if (last && last.weaponClass === item.weapon.weapon_class) last.items.push(item);
+    else groups.push({ weaponClass: item.weapon.weapon_class, items: [item] });
+  }
+  return groups;
+}
+
+function WeaponCard({
+  item,
+  pinned,
+  showClass,
+  sort,
+  onTogglePin,
+}: {
+  item: Item;
+  pinned: boolean;
+  showClass: boolean;
+  sort: WeaponSort;
+  onTogglePin: () => void;
+}) {
+  const { weapon, closest } = item;
+  return (
+    <li className="card relative flex flex-col gap-2 p-3 transition-colors hover:border-zinc-600">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          {/* O link cobre o cartão todo; o alfinete fica por cima (z-10). */}
+          <Link
+            to={`/camos/${weapon.id}`}
+            className="font-medium after:absolute after:inset-0 after:rounded-lg after:content-[''] hover:text-emerald-400 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-emerald-400"
+          >
+            {weapon.name}
+          </Link>
+          {showClass && <p className="text-xs text-zinc-500">{weaponClassLabel(weapon.weapon_class)}</p>}
+        </div>
+        <div className="relative z-10 -mt-1 -mr-1 flex items-center gap-1">
+          {item.complete && <CompleteSeal label="Completa" />}
+          <PinButton pinned={pinned} weaponName={weapon.name} onToggle={onTogglePin} />
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <ProgressBar value={item.fraction} label={`Camos da ${weapon.name}`} className="flex-1" />
+        <span className="text-xs text-zinc-400 tabular-nums">
+          {item.unlocked}/{item.total}
+        </span>
+      </div>
+      {!item.complete && (
+        <p className="text-xs text-zinc-500">
+          {closest
+            ? `Próximo: ${closest.camo.name} · faltam ${closest.remaining} ${closest.camo.requirement_type === 'headshots' ? 'headshots' : 'kills'}`
+            : sort === 'perto'
+              ? 'Sem requisitos conhecidos'
+              : null}
+        </p>
+      )}
+    </li>
   );
 }
 
@@ -148,82 +235,5 @@ function FilterChip({
     >
       {children}
     </button>
-  );
-}
-
-function CamoHeader({ camo }: { camo: CamoRow }) {
-  return (
-    <th scope="col" className="h-32 px-1 pb-2 align-bottom font-normal">
-      <div className="mx-auto flex w-9 flex-col items-center justify-end gap-1">
-        <span
-          className="text-xs whitespace-nowrap text-zinc-300 [writing-mode:vertical-rl]"
-          style={{ transform: 'rotate(180deg)' }}
-        >
-          {camo.name}
-        </span>
-        {!camo.verified && <UnverifiedBadge compact />}
-      </div>
-    </th>
-  );
-}
-
-function CamoCell({ state, label, onClick }: { state: CamoState; label: string; onClick: () => void }) {
-  let content: ReactNode;
-  let classes: string;
-  let status: string;
-
-  if (state.unlocked) {
-    content = '✓';
-    classes = 'bg-emerald-600 text-white hover:bg-emerald-500';
-    status = 'desbloqueado';
-  } else if (state.count > 0) {
-    content = <span className="text-[10px] leading-none tabular-nums">{compactCount(state.count)}</span>;
-    classes = 'bg-zinc-800 text-zinc-200 hover:bg-zinc-700';
-    status = state.target !== null ? `${state.count} de ${state.target}` : `${state.count}, objetivo por confirmar`;
-  } else {
-    content = null;
-    classes = 'bg-zinc-800/60 hover:bg-zinc-700';
-    status = 'bloqueado';
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={`${label}: ${status}`}
-      title={`${label}: ${status}`}
-      className={`relative flex size-9 items-center justify-center overflow-hidden rounded-md text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none ${classes}`}
-    >
-      {content}
-      {!state.unlocked && state.fraction !== null && state.fraction > 0 && (
-        <span
-          aria-hidden
-          className="absolute bottom-0 left-0 h-1 bg-emerald-500"
-          style={{ width: `${state.fraction * 100}%` }}
-        />
-      )}
-    </button>
-  );
-}
-
-function compactCount(n: number): string {
-  if (n >= 10_000) return `${Math.floor(n / 1000)}k`;
-  if (n >= 1000) return `${(n / 1000).toFixed(1).replace('.', ',')}k`;
-  return String(n);
-}
-
-function Legend() {
-  return (
-    <ul className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-400">
-      <li className="flex items-center gap-1.5">
-        <span className="inline-block size-3 rounded-sm bg-emerald-600" /> desbloqueado
-      </li>
-      <li className="flex items-center gap-1.5">
-        <span className="inline-block size-3 rounded-sm bg-zinc-800" /> bloqueado (número = contador)
-      </li>
-      <li className="flex items-center gap-1.5">
-        <UnverifiedBadge compact /> requisito por confirmar
-      </li>
-    </ul>
   );
 }

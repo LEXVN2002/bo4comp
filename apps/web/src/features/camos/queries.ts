@@ -5,6 +5,7 @@ import { getSupabase } from '../../lib/supabase';
 export type CamoProgressRow = Tables<'weapon_camo_progress'>;
 
 export const camoProgressKey = ['camo-progress'] as const;
+const saveCamoProgressKey = ['save-camo-progress'] as const;
 
 async function fetchCamoProgress(): Promise<CamoProgressRow[]> {
   // O RLS devolve só as linhas do utilizador autenticado.
@@ -34,6 +35,7 @@ export function useSaveCamoProgress() {
   const queryClient = useQueryClient();
 
   return useMutation({
+    mutationKey: saveCamoProgressKey,
     mutationFn: async (input: SaveCamoProgressInput) => {
       const supabase = getSupabase();
       const unlockedAt = input.unlocked ? (input.previousUnlockedAt ?? new Date().toISOString()) : null;
@@ -75,6 +77,12 @@ export function useSaveCamoProgress() {
     onError: (_error, _input, context) => {
       if (context?.previous) queryClient.setQueryData(camoProgressKey, context.previous);
     },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: camoProgressKey }),
+    onSettled: () => {
+      // Com vários toques seguidos (+1, +1, +1), só refazer o pedido no fim do último,
+      // para uma resposta antiga não apagar o estado otimista dos toques seguintes.
+      if (queryClient.isMutating({ mutationKey: saveCamoProgressKey }) === 1) {
+        return queryClient.invalidateQueries({ queryKey: camoProgressKey });
+      }
+    },
   });
 }
