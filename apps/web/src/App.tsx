@@ -11,6 +11,7 @@ import Login from './routes/Login';
 import NewSession from './routes/NewSession';
 import NotFound from './routes/NotFound';
 import Sessions from './routes/Sessions';
+import Settings from './routes/Settings';
 import Weapon from './routes/Weapon';
 
 const router = createBrowserRouter([
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: '/sessions/new', element: <NewSession /> },
       { path: '/sessions', element: <Sessions /> },
       { path: '/sessions/:sessionId/edit', element: <EditSession /> },
+      { path: '/settings', element: <Settings /> },
       { path: '*', element: <NotFound /> },
     ],
   },

@@ -283,6 +283,12 @@ isOneToOne: false
 "delete_session":
 { Args: { "p_session_id": string }; Returns: undefined
                            },
+"export_progress":
+{ Args: Record<PropertyKey, never>; Returns: Json
+                           },
+"import_progress":
+{ Args: { "p_data": Json }; Returns: Json
+                           },
 "insert_session_weapon_stats":
 { Args: { "p_session_id": string,"p_weapon_stats": Json }; Returns: undefined
                            },

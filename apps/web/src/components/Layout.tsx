@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router';
+import { Link, NavLink, Outlet } from 'react-router';
 import { useAuth } from '../features/auth/AuthProvider';
 
 const NAV = [
@@ -20,6 +20,9 @@ export function Layout() {
           <span className="ml-auto truncate text-xs text-zinc-500" title={session?.user.email}>
             {session?.user.email}
           </span>
+          <Link to="/settings" className="shrink-0 text-xs text-zinc-400 hover:text-zinc-100">
+            Definições
+          </Link>
           <button
             type="button"
             onClick={() => void signOut()}
