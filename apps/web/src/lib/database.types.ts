@@ -119,14 +119,14 @@ isOneToOne: false
                   ]
                 },"easter_egg_steps": {
                   Row: {
-                    "details": string | null,"easter_egg_id": string,"id": string,"step_order": number,"title": string
+                    "details": string | null,"easter_egg_id": string,"id": string,"section": string | null,"step_order": number,"title": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "details"?: string | null,"easter_egg_id": string,"id": string,"step_order": number,"title": string
+                    "details"?: string | null,"easter_egg_id": string,"id": string,"section"?: string | null,"step_order": number,"title": string
                   }
                   Update: {
-                    "details"?: string | null,"easter_egg_id"?: string,"id"?: string,"step_order"?: number,"title"?: string
+                    "details"?: string | null,"easter_egg_id"?: string,"id"?: string,"section"?: string | null,"step_order"?: number,"title"?: string
                   }
                   Relationships: [
                     {
@@ -139,14 +139,14 @@ isOneToOne: false
                   ]
                 },"easter_eggs": {
                   Row: {
-                    "id": string,"map_id": string,"max_players": number | null,"min_players": number | null,"name": string,"type": string,"verified": boolean
+                    "id": string,"map_id": string,"max_players": number | null,"min_players": number | null,"name": string,"sources": string[],"type": string,"verified": boolean
                   }
                   ComputedFields: never
                   Insert: {
-                    "id": string,"map_id": string,"max_players"?: number | null,"min_players"?: number | null,"name": string,"type": string,"verified"?: boolean
+                    "id": string,"map_id": string,"max_players"?: number | null,"min_players"?: number | null,"name": string,"sources"?: string[],"type": string,"verified"?: boolean
                   }
                   Update: {
-                    "id"?: string,"map_id"?: string,"max_players"?: number | null,"min_players"?: number | null,"name"?: string,"type"?: string,"verified"?: boolean
+                    "id"?: string,"map_id"?: string,"max_players"?: number | null,"min_players"?: number | null,"name"?: string,"sources"?: string[],"type"?: string,"verified"?: boolean
                   }
                   Relationships: [
                     {

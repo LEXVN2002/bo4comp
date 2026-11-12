@@ -96,13 +96,15 @@ create table easter_eggs (
   name text not null,
   type text not null check (type in ('main','side','song','music','other')),
   min_players int, max_players int,
-  verified boolean not null default false
+  verified boolean not null default false,
+  sources text[] not null default '{}'   -- links dos guias usados nos passos
 );
 
 create table easter_egg_steps (
   id text primary key,
   easter_egg_id text not null references easter_eggs(id) on delete cascade,
   step_order int not null,
+  section text,                          -- ex.: 'Pack-a-Punch', 'Escudo', 'Quest principal'
   title text not null,
   details text,
   unique (easter_egg_id, step_order)
@@ -187,7 +189,7 @@ O seed começa com os 8 mapas, as armas base e os nomes dos camos; os requisitos
 | `ix` | IX | Chaos | 1 | Sim |
 | `voyage-of-despair` | Voyage of Despair | Chaos | 2 | Sim |
 | `blood-of-the-dead` | Blood of the Dead | Aether | 3 | Sim |
-| `classified` | Classified | Aether | 4 | Não (confirmar) |
+| `classified` | Classified | Aether | 4 | Não (confirmar); Project Skadi registado como secundário |
 | `dead-of-the-night` | Dead of the Night | Chaos | 5 (DLC 1) | Sim |
 | `ancient-evil` | Ancient Evil | Chaos | 6 (DLC 2) | Sim |
 | `alpha-omega` | Alpha Omega | Aether | 7 (DLC 3) | Sim |

@@ -3,7 +3,7 @@ import { ProgressBar } from '../../components/ProgressBar';
 import { UnverifiedBadge } from '../../components/UnverifiedBadge';
 import { describeError } from '../../lib/errors';
 import { formatDateTime, formatPlayers } from '../../lib/format';
-import { playersRange, sortSteps, stepProgress } from './progress';
+import { groupSteps, playersRange, sortSteps, stepProgress, type StepSection } from './progress';
 import {
   useAddCompletion,
   useDeleteCompletion,
@@ -30,6 +30,9 @@ interface Props {
 export function EasterEggCard({ egg, doneSteps, completions }: Props) {
   const steps = sortSteps(egg.easter_egg_steps);
   const progress = stepProgress(steps, doneSteps);
+  const sections = groupSteps(steps);
+  // Abre, ao carregar, a primeira secção com passos por fazer.
+  const firstPending = sections.findIndex((s) => s.steps.some((step) => !doneSteps.has(step.id)));
   const toggle = useToggleStep();
   const players = playersRange(egg.min_players, egg.max_players);
   const completed = completions.length > 0;
@@ -68,29 +71,17 @@ export function EasterEggCard({ egg, doneSteps, completions }: Props) {
               {progress.done}/{progress.total}
             </span>
           </div>
-          <ol className="space-y-1">
-            {steps.map((step) => {
-              const done = doneSteps.has(step.id);
-              return (
-                <li key={step.id}>
-                  <label className="flex cursor-pointer items-start gap-3 rounded-md px-2 py-1.5 hover:bg-zinc-800/60">
-                    <input
-                      type="checkbox"
-                      checked={done}
-                      onChange={() => toggle.mutate({ stepId: step.id, done: !done })}
-                      className="mt-0.5 size-4 shrink-0 accent-emerald-500"
-                    />
-                    <span className="min-w-0 text-sm">
-                      <span className={done ? 'text-zinc-500 line-through' : 'text-zinc-100'}>
-                        {step.step_order}. {step.title}
-                      </span>
-                      {step.details && <span className="mt-0.5 block text-xs text-zinc-400">{step.details}</span>}
-                    </span>
-                  </label>
-                </li>
-              );
-            })}
-          </ol>
+          <div className="space-y-2">
+            {sections.map((section, i) => (
+              <StepSectionBlock
+                key={`${i}-${section.name ?? ''}`}
+                section={section}
+                doneSteps={doneSteps}
+                initiallyOpen={i === firstPending}
+                onToggle={(stepId, done) => toggle.mutate({ stepId, done })}
+              />
+            ))}
+          </div>
           {toggle.isError && (
             <p role="alert" className="text-xs text-red-400">
               Não foi possível guardar o passo: {describeError(toggle.error)}
@@ -103,8 +94,99 @@ export function EasterEggCard({ egg, doneSteps, completions }: Props) {
         </p>
       )}
 
+      {egg.sources.length > 0 && <Sources urls={egg.sources} verified={egg.verified} />}
+
       <CompletionControls egg={egg} completions={completions} />
     </article>
+  );
+}
+
+type Step = EasterEggWithSteps['easter_egg_steps'][number];
+
+function StepSectionBlock({
+  section,
+  doneSteps,
+  initiallyOpen,
+  onToggle,
+}: {
+  section: StepSection<Step>;
+  doneSteps: ReadonlySet<string>;
+  initiallyOpen: boolean;
+  onToggle: (stepId: string, done: boolean) => void;
+}) {
+  const [open, setOpen] = useState(initiallyOpen);
+  const done = section.steps.filter((s) => doneSteps.has(s.id)).length;
+  const complete = done === section.steps.length;
+
+  return (
+    <details
+      open={open}
+      onToggle={(e) => setOpen(e.currentTarget.open)}
+      className="rounded-md border border-zinc-800"
+    >
+      <summary className="flex cursor-pointer items-center justify-between gap-2 px-3 py-2 text-sm font-medium select-none hover:bg-zinc-800/60">
+        <span className={complete ? 'text-emerald-300' : 'text-zinc-200'}>{section.name ?? 'Passos'}</span>
+        <span className="text-xs text-zinc-400 tabular-nums">
+          {done}/{section.steps.length}
+        </span>
+      </summary>
+      <ol className="space-y-1 px-1 pb-2">
+        {section.steps.map((step) => {
+          const isDone = doneSteps.has(step.id);
+          return (
+            <li key={step.id}>
+              <label className="flex cursor-pointer items-start gap-3 rounded-md px-2 py-1.5 hover:bg-zinc-800/60">
+                <input
+                  type="checkbox"
+                  checked={isDone}
+                  onChange={() => onToggle(step.id, !isDone)}
+                  className="mt-0.5 size-4 shrink-0 accent-emerald-500"
+                />
+                <span className="min-w-0 text-sm">
+                  <span className={isDone ? 'text-zinc-500 line-through' : 'text-zinc-100'}>
+                    {step.step_order}. {step.title}
+                  </span>
+                  {step.details && (
+                    <span className="mt-0.5 block text-xs leading-relaxed whitespace-pre-line text-zinc-400">
+                      {step.details}
+                    </span>
+                  )}
+                </span>
+              </label>
+            </li>
+          );
+        })}
+      </ol>
+    </details>
+  );
+}
+
+function hostname(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+
+function Sources({ urls, verified }: { urls: string[]; verified: boolean }) {
+  return (
+    <div className="space-y-1 text-xs text-zinc-500">
+      <p>
+        {verified
+          ? 'Passos resumidos dos guias:'
+          : 'Passos resumidos de guias de terceiros, ainda por confirmar no jogo. Fontes:'}
+      </p>
+      <ul className="flex flex-wrap gap-x-3 gap-y-1">
+        {urls.map((url) => (
+          <li key={url}>
+            <a href={url} target="_blank" rel="noopener noreferrer" className="underline hover:text-zinc-200">
+              {hostname(url)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

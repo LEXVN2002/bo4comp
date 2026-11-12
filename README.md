@@ -52,8 +52,15 @@ Uso pessoal: a app não é um serviço público (ver "Regras e limites" na spec)
    pnpm exec supabase db push --include-seed
    ```
 
-   Para atualizar o catálogo mais tarde: `pnpm seed` e voltar a correr `db push --include-seed`
-   (o seed é idempotente).
+   Para atualizar o catálogo mais tarde: `pnpm seed`, `pnpm exec supabase db push --remote`
+   (migrações novas) e depois correr o seed à mão (é idempotente):
+
+   ```sh
+   pnpm exec supabase db query --remote -f supabase/seed.sql
+   ```
+
+   Atenção: quando o seed já foi aplicado uma vez, `db push --include-seed` só atualiza o hash
+   do ficheiro ("Updating seed hash") e **não** volta a executá-lo.
 3. Em **Authentication → URL Configuration**: *Site URL* = URL do Netlify
    (ex.: `https://<site>.netlify.app`) e acrescentar o mesmo URL às *Redirect URLs*.
 4. Em **Authentication → Providers → Email**: deixar só o login por email (magic link).

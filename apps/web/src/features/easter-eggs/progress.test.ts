@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { playersRange, sortSteps, stepProgress, summarizeCompletions } from './progress';
+import { groupSteps, playersRange, sortSteps, stepProgress, summarizeCompletions } from './progress';
 
 describe('stepProgress', () => {
   const steps = [
@@ -47,5 +47,23 @@ describe('playersRange', () => {
     expect(playersRange(4, 4)).toBe('4 jogadores');
     expect(playersRange(2, null)).toBe('2+ jogadores');
     expect(playersRange(null, 2)).toBe('até 2 jogadores');
+  });
+});
+
+describe('groupSteps', () => {
+  const step = (n: number, section: string | null) => ({ id: `s${n}`, step_order: n, section });
+
+  it('agrupa passos consecutivos da mesma secção, mantendo a ordem', () => {
+    const groups = groupSteps([step(1, 'Pack-a-Punch'), step(2, 'Pack-a-Punch'), step(3, 'Escudo'), step(4, null)]);
+    expect(groups.map((g) => [g.name, g.steps.map((s) => s.id)])).toEqual([
+      ['Pack-a-Punch', ['s1', 's2']],
+      ['Escudo', ['s3']],
+      [null, ['s4']],
+    ]);
+  });
+
+  it('não junta secções repetidas que não são consecutivas', () => {
+    expect(groupSteps([step(1, 'A'), step(2, 'B'), step(3, 'A')])).toHaveLength(3);
+    expect(groupSteps([])).toEqual([]);
   });
 });

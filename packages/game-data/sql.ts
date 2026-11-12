@@ -1,10 +1,11 @@
 import { stepId, type GameData } from './schemas.ts';
 
-type SqlValue = string | number | boolean | null;
+type SqlValue = string | number | boolean | null | string[];
 
 /** Converte um valor JS num literal SQL seguro (standard_conforming_strings = on). */
 export function sqlLiteral(value: SqlValue): string {
   if (value === null) return 'null';
+  if (Array.isArray(value)) return textArray(value);
   if (typeof value === 'boolean') return value ? 'true' : 'false';
   if (typeof value === 'number') {
     if (!Number.isSafeInteger(value)) throw new Error(`número não suportado no seed: ${value}`);
@@ -46,7 +47,9 @@ export function generateSeedSql(data: GameData): string {
   const steps = data.easterEggs.flatMap((egg) =>
     [...egg.steps]
       .sort((a, b) => a.order - b.order)
-      .map((s) => [stepId(egg.id, s.order), egg.id, s.order, s.title, s.details] as SqlValue[]),
+      .map(
+        (s) => [stepId(egg.id, s.order), egg.id, s.order, s.section, s.title, s.details] as SqlValue[],
+      ),
   );
   const eggIds = data.easterEggs.map((e) => e.id);
   const stepIds = steps.map((s) => s[0] as string);
@@ -89,7 +92,7 @@ export function generateSeedSql(data: GameData): string {
     ),
     upsertSql(
       'easter_eggs',
-      ['id', 'map_id', 'name', 'type', 'min_players', 'max_players', 'verified'],
+      ['id', 'map_id', 'name', 'type', 'min_players', 'max_players', 'verified', 'sources'],
       data.easterEggs.map((e) => [
         e.id,
         e.map_id,
@@ -98,6 +101,7 @@ export function generateSeedSql(data: GameData): string {
         e.min_players,
         e.max_players,
         e.verified,
+        e.sources,
       ]),
     ),
     '-- Passos que deixaram de existir no JSON (o progresso desses passos é apagado em cascata).',
@@ -106,7 +110,11 @@ export function generateSeedSql(data: GameData): string {
       : `delete from public.easter_egg_steps\n` +
         `where easter_egg_id = any(${textArray(eggIds)})\n` +
         `  and not (id = any(${textArray(stepIds)}));\n`,
-    upsertSql('easter_egg_steps', ['id', 'easter_egg_id', 'step_order', 'title', 'details'], steps),
+    upsertSql(
+      'easter_egg_steps',
+      ['id', 'easter_egg_id', 'step_order', 'section', 'title', 'details'],
+      steps,
+    ),
     upsertSql(
       'challenges',
       ['id', 'map_id', 'name', 'description', 'target'],

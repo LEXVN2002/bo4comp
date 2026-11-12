@@ -29,6 +29,26 @@ export function summarizeCompletions<C extends CompletionLike>(completions: read
   return byEgg;
 }
 
+export interface StepSection<S> {
+  /** null = passos sem secção. */
+  name: string | null;
+  steps: S[];
+}
+
+/**
+ * Agrupa passos (já ordenados) em secções consecutivas, mantendo a ordem.
+ * Se a mesma secção voltar a aparecer mais à frente, cria um novo grupo.
+ */
+export function groupSteps<S extends StepLike & { section: string | null }>(steps: readonly S[]): StepSection<S>[] {
+  const groups: StepSection<S>[] = [];
+  for (const step of steps) {
+    const last = groups.at(-1);
+    if (last && last.name === step.section) last.steps.push(step);
+    else groups.push({ name: step.section, steps: [step] });
+  }
+  return groups;
+}
+
 export function sortSteps<S extends StepLike>(steps: readonly S[]): S[] {
   return [...steps].sort((a, b) => a.step_order - b.step_order);
 }

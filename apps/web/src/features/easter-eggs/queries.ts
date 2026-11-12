@@ -9,7 +9,14 @@ export interface EasterEggWithSteps {
   min_players: number | null;
   max_players: number | null;
   verified: boolean;
-  easter_egg_steps: { id: string; step_order: number; title: string; details: string | null }[];
+  sources: string[];
+  easter_egg_steps: {
+    id: string;
+    step_order: number;
+    section: string | null;
+    title: string;
+    details: string | null;
+  }[];
 }
 
 export interface StepProgressRow {
@@ -38,7 +45,10 @@ export function useEasterEggs() {
     queryFn: async (): Promise<EasterEggWithSteps[]> => {
       const { data, error } = await getSupabase()
         .from('easter_eggs')
-        .select('id, map_id, name, type, min_players, max_players, verified, easter_egg_steps(id, step_order, title, details)')
+        // Uma só string literal: o supabase-js infere o tipo a partir dela.
+        .select(
+          'id, map_id, name, type, min_players, max_players, verified, sources, easter_egg_steps(id, step_order, section, title, details)',
+        )
         .order('id');
       if (error) throw error;
       return data;

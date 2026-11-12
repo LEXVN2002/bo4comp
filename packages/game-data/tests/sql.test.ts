@@ -18,9 +18,10 @@ const sample: GameData = {
       min_players: 1,
       max_players: 4,
       verified: false,
+      sources: ['https://example.com/guia'],
       steps: [
-        { order: 2, title: 'Segundo', details: null },
-        { order: 1, title: "Abrir a porta d'arena", details: 'linha 1\nlinha 2' },
+        { order: 2, section: null, title: 'Segundo', details: null },
+        { order: 1, section: 'Pack-a-Punch', title: "Abrir a porta d'arena", details: 'linha 1\nlinha 2' },
       ],
     },
   ],
@@ -34,6 +35,8 @@ describe('sqlLiteral', () => {
     expect(sqlLiteral(null)).toBe('null');
     expect(sqlLiteral(true)).toBe('true');
     expect(sqlLiteral(42)).toBe('42');
+    expect(sqlLiteral([])).toBe("'{}'::text[]");
+    expect(sqlLiteral(["a'b", 'c'])).toBe("array['a''b', 'c']");
   });
 
   it('recusa números não inteiros', () => {
@@ -72,8 +75,9 @@ describe('generateSeedSql', () => {
     const sql = generateSeedSql(sample);
     expect(sql.indexOf("'ix-main-1'")).toBeLessThan(sql.indexOf("'ix-main-2'"));
     expect(sql).toContain(
-      "('ix-main-1', 'ix-main', 1, 'Abrir a porta d''arena', 'linha 1\nlinha 2')",
+      "('ix-main-1', 'ix-main', 1, 'Pack-a-Punch', 'Abrir a porta d''arena', 'linha 1\nlinha 2')",
     );
+    expect(sql).toContain("'main', 1, 4, false, array['https://example.com/guia'])");
     expect(sql).toContain(
       "delete from public.easter_egg_steps\nwhere easter_egg_id = any(array['ix-main'])\n" +
         "  and not (id = any(array['ix-main-1', 'ix-main-2']));",

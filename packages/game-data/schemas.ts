@@ -83,9 +83,14 @@ export const camoSchema = z
 
 export const easterEggStepSchema = z.strictObject({
   order: z.number().int().min(1),
+  /** Agrupa passos no ecrã (ex.: 'Pack-a-Punch', 'Escudo'). null = sem secção. */
+  section: nonEmpty.nullable(),
   title: nonEmpty,
   details: z.string().nullable(),
 });
+
+/** Link para um guia de terceiros usado para escrever os passos. */
+const guideUrl = z.url({ protocol: /^https$/, error: 'tem de ser um URL https' });
 
 export const easterEggSchema = z
   .strictObject({
@@ -96,6 +101,7 @@ export const easterEggSchema = z
     min_players: playerCount.nullable(),
     max_players: playerCount.nullable(),
     verified: z.boolean(),
+    sources: z.array(guideUrl),
     steps: z.array(easterEggStepSchema),
   })
   .superRefine((egg, ctx) => {
@@ -104,6 +110,13 @@ export const easterEggSchema = z
         code: 'custom',
         path: ['max_players'],
         message: 'max_players tem de ser >= min_players',
+      });
+    }
+    if (egg.steps.length > 0 && egg.sources.length === 0) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['sources'],
+        message: 'passos de um guia precisam de pelo menos uma fonte',
       });
     }
     const seen = new Set<number>();

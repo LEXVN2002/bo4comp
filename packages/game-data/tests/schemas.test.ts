@@ -27,6 +27,7 @@ function base(): Record<keyof GameData, unknown> {
         min_players: null,
         max_players: null,
         verified: false,
+        sources: [],
         steps: [],
       },
     ],
@@ -122,14 +123,26 @@ describe('validateGameData', () => {
     Object.assign((raw.easterEggs as object[])[0]!, {
       min_players: 4,
       max_players: 2,
+      sources: ['https://example.com/guia'],
       steps: [
-        { order: 1, title: 'A', details: null },
-        { order: 1, title: 'B', details: null },
+        { order: 1, section: null, title: 'A', details: null },
+        { order: 1, section: null, title: 'B', details: null },
       ],
     });
     const issues = issuesOf(raw).join('\n');
     expect(issues).toMatch(/ordem de passo repetida: 1/);
     expect(issues).toMatch(/max_players tem de ser >= min_players/);
+  });
+
+  it('exige fontes https quando há passos', () => {
+    const raw = base();
+    Object.assign((raw.easterEggs as object[])[0]!, {
+      steps: [{ order: 1, section: 'Escudo', title: 'A', details: null }],
+    });
+    expect(issuesOf(raw).join('\n')).toMatch(/pelo menos uma fonte/);
+
+    Object.assign((raw.easterEggs as object[])[0]!, { sources: ['http://example.com'] });
+    expect(issuesOf(raw).join('\n')).toMatch(/URL https/);
   });
 
   it('reporta problemas de vários ficheiros de uma vez', () => {
