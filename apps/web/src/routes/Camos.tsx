@@ -13,6 +13,7 @@ import {
   type WeaponListItem,
   type WeaponSort,
 } from '../features/camos/listFilters';
+import { ClassSeals } from '../features/camos/ClassSeals';
 import { PinnedWeapons } from '../features/camos/PinnedWeapons';
 import { useCamoData } from '../features/camos/useCamoData';
 import { useTogglePin } from '../features/camos/userData';
@@ -72,6 +73,13 @@ export default function Camos() {
           </Link>
         </div>
       </header>
+
+      <section aria-labelledby="seals-title" className="space-y-2">
+        <h2 id="seals-title" className="text-sm font-medium tracking-wide text-zinc-400 uppercase">
+          Selos de classe
+        </h2>
+        <ClassSeals data={data} />
+      </section>
 
       <section aria-labelledby="pinned-title" className="space-y-2">
         <h2 id="pinned-title" className="text-sm font-medium tracking-wide text-zinc-400 uppercase">

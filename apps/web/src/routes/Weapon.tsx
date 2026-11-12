@@ -1,35 +1,18 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import { ProgressBar } from '../components/ProgressBar';
 import { ErrorMessage, Loading } from '../components/QueryState';
 import { UnverifiedBadge } from '../components/UnverifiedBadge';
 import { CamoSwatch, CompleteSeal, NotesField, PinButton } from '../features/camos/CamoBits';
-import { CamoPanel } from '../features/camos/CamoPanel';
-import { useSaveCamoProgress } from '../features/camos/queries';
+import { CamoPanelHost } from '../features/camos/CamoPanelHost';
 import { moveIndex, SHORTCUT_HELP, shortcutFor } from '../features/camos/shortcuts';
+import { useCamoActions } from '../features/camos/useCamoActions';
 import { useCamoData, type CamoData } from '../features/camos/useCamoData';
-import { useUnlockAnimations } from '../features/unlocks/UnlockAnimations';
-import {
-  useCamoNotes,
-  useSaveCamoNote,
-  useSaveWeaponNote,
-  useTogglePin,
-  useWeaponNote,
-  useWeaponRecentStats,
-} from '../features/camos/userData';
+import { useSaveWeaponNote, useTogglePin, useWeaponNote } from '../features/camos/userData';
 import type { CamoRow, WeaponRow } from '../features/catalog/queries';
 import { formatDateTime } from '../lib/format';
 import { weaponClassLabel } from '../lib/labels';
-import {
-  camoDisplayState,
-  camoState,
-  estimateMatches,
-  formatPercent,
-  isCountedRequirement,
-  progressKey,
-  sortByTier,
-  weaponSummary,
-} from '../lib/progress';
+import { camoDisplayState, camoState, formatPercent, progressKey, sortByTier, weaponSummary } from '../lib/progress';
 
 export default function Weapon() {
   const { weaponId = '' } = useParams();
@@ -56,17 +39,14 @@ export default function Weapon() {
 function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
   const camos = useMemo(() => sortByTier(data.camos), [data.camos]);
   const catalogById = useMemo(() => new Map(data.catalogCamos.map((c) => [c.id, c])), [data.catalogCamos]);
-  const save = useSaveCamoProgress();
+  const actions = useCamoActions(data);
+  const { changeCountBy, toggleDone } = actions;
   const togglePin = useTogglePin();
-  const notes = useCamoNotes(weapon.id);
-  const saveNote = useSaveCamoNote(weapon.id);
   const weaponNote = useWeaponNote(weapon.id);
   const saveWeaponNote = useSaveWeaponNote(weapon.id);
-  const recentStats = useWeaponRecentStats(weapon.id);
 
   const [selected, setSelected] = useState(0);
   const [panelOpen, setPanelOpen] = useState(false);
-  const { enqueue } = useUnlockAnimations();
   const helpRef = useRef<HTMLDialogElement>(null);
   const gridRef = useRef<HTMLOListElement>(null);
   const tileRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -74,63 +54,6 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
   const pinned = data.pinned.includes(weapon.id);
   const summary = weaponSummary(weapon.id, camos, data.index);
   const selectedCamo = camos[selected];
-
-  // Último valor pedido por camo, ainda por confirmar. A cache do TanStack Query só recebe
-  // o valor otimista depois de um await, por isso toques muito rápidos leriam o valor antigo.
-  const pendingCounts = useRef(new Map<string, number>());
-
-  const setCount = useCallback(
-    (camo: CamoRow, count: number) => {
-      const row = data.index.get(progressKey(weapon.id, camo.id));
-      const state = camoState(camo, row);
-      // Atingir o objetivo marca o camo como concluído automaticamente.
-      const reached =
-        isCountedRequirement(camo.requirement_type) && camo.requirement_value !== null && count >= camo.requirement_value;
-      if (reached && !state.unlocked) enqueue([{ camoId: camo.id, title: camo.name, subtitle: weapon.name }]);
-      pendingCounts.current.set(camo.id, count);
-      save.mutate(
-        {
-          weaponId: weapon.id,
-          camoId: camo.id,
-          currentCount: count,
-          unlocked: state.unlocked || reached,
-          previousUnlockedAt: row?.unlocked_at ?? null,
-        },
-        {
-          onSettled: () => {
-            if (pendingCounts.current.get(camo.id) === count) pendingCounts.current.delete(camo.id);
-          },
-        },
-      );
-    },
-    [data.index, enqueue, save, weapon.id, weapon.name],
-  );
-
-  const changeCountBy = useCallback(
-    (camo: CamoRow, delta: number) => {
-      const current =
-        pendingCounts.current.get(camo.id) ?? data.index.get(progressKey(weapon.id, camo.id))?.current_count ?? 0;
-      setCount(camo, Math.max(current + delta, 0));
-    },
-    [data.index, setCount, weapon.id],
-  );
-
-  const toggleDone = useCallback(
-    (camo: CamoRow) => {
-      if (camoDisplayState(weapon.id, camo, camos, data.index) === 'locked') return;
-      const row = data.index.get(progressKey(weapon.id, camo.id));
-      const unlocked = row?.unlocked_at == null;
-      if (unlocked) enqueue([{ camoId: camo.id, title: camo.name, subtitle: weapon.name }]);
-      save.mutate({
-        weaponId: weapon.id,
-        camoId: camo.id,
-        currentCount: row?.current_count ?? 0,
-        unlocked,
-        previousUnlockedAt: row?.unlocked_at ?? null,
-      });
-    },
-    [camos, data.index, enqueue, save, weapon.id, weapon.name],
-  );
 
   // ---------- Atalhos de teclado ----------
   useEffect(() => {
@@ -166,10 +89,10 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
           setPanelOpen((open) => !open);
           break;
         case 'count':
-          if (camo && camo.requirement_type !== 'prereq_all') changeCountBy(camo, action.delta);
+          if (camo && camo.requirement_type !== 'prereq_all') changeCountBy(weapon, camo, action.delta);
           break;
         case 'toggle-done':
-          if (camo) toggleDone(camo);
+          if (camo) toggleDone(weapon, camo);
           break;
         case 'toggle-pin':
           togglePin.mutate({ weaponId: weapon.id, pinned: !pinned });
@@ -188,7 +111,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [camos, changeCountBy, panelOpen, pinned, selected, toggleDone, togglePin, weapon.id]);
+  }, [camos, changeCountBy, panelOpen, pinned, selected, toggleDone, togglePin, weapon]);
 
   const timeline = camos
     .map((camo) => ({ camo, at: data.index.get(progressKey(weapon.id, camo.id))?.unlocked_at ?? null }))
@@ -196,14 +119,6 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
     .sort((a, b) => Date.parse(b.at) - Date.parse(a.at));
 
   const fraction = summary.total ? summary.unlocked / summary.total : 0;
-
-  function panelEstimate(camo: CamoRow) {
-    const state = camoState(camo, data.index.get(progressKey(weapon.id, camo.id)));
-    if (state.unlocked || state.target === null) return null;
-    if (camo.requirement_type !== 'kills' && camo.requirement_type !== 'headshots') return null;
-    if (!recentStats.data) return recentStats.isError ? null : 'loading';
-    return estimateMatches(state.target - state.count, camo.requirement_type, recentStats.data);
-  }
 
   return (
     <section className={`space-y-6 ${panelOpen ? 'pb-[60vh] lg:pr-[24rem] lg:pb-0' : ''}`}>
@@ -329,24 +244,15 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
       </div>
 
       {panelOpen && selectedCamo && (
-        <CamoPanel
+        <CamoPanelHost
           weapon={weapon}
-          catalogCamo={catalogById.get(selectedCamo.id) ?? selectedCamo}
           camo={selectedCamo}
-          override={data.overrides.get(selectedCamo.id)}
-          progress={data.index.get(progressKey(weapon.id, selectedCamo.id))}
-          display={camoDisplayState(weapon.id, selectedCamo, camos, data.index)}
-          note={notes.data ? (notes.data.find((n) => n.camo_id === selectedCamo.id)?.body ?? '') : null}
-          onSaveNote={(body) => saveNote.mutateAsync({ camoId: selectedCamo.id, body })}
-          onSetCount={(count) => setCount(selectedCamo, count)}
-          onChangeCountBy={(delta) => changeCountBy(selectedCamo, delta)}
-          onToggleDone={() => toggleDone(selectedCamo)}
+          data={data}
+          actions={actions}
           onClose={() => {
             setPanelOpen(false);
             tileRefs.current[selected]?.focus();
           }}
-          saveError={save.error}
-          estimate={panelEstimate(selectedCamo)}
         />
       )}
 

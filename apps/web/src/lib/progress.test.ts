@@ -7,6 +7,7 @@ import {
   estimateMatches,
   indexOverrides,
   isMasteryLocked,
+  masteryUnlockedBy,
   nextMeasurableCamo,
   withOverride,
   formatPercent,
@@ -264,5 +265,24 @@ describe('classSeal', () => {
     const seal = classSeal('smg', weapons, camos, indexProgress([at('a', 'k', '2026-11-01T00:00:00Z')]));
     expect(seal).toMatchObject({ complete: false, unlocked: 1, total: 4, fraction: 0.25, earnedAt: null });
     expect(classSeal('sniper', weapons, camos, indexProgress([]))).toMatchObject({ complete: false, total: 0 });
+  });
+});
+
+describe('masteryUnlockedBy', () => {
+  const k: CamoLike = { id: 'k', tier: 1, requirement_type: 'kills', requirement_value: 10 };
+  const u: CamoLike = { id: 'u', tier: 2, requirement_type: 'unknown', requirement_value: null };
+  const g: CamoLike = { id: 'g', tier: 3, requirement_type: 'prereq_all', requirement_value: null };
+  const d: CamoLike = { id: 'd', tier: 4, requirement_type: 'prereq_all', requirement_value: null };
+  const camos = [d, g, u, k];
+
+  it('concluir o último camo normal desbloqueia os mastery em cadeia, por tier', () => {
+    expect(masteryUnlockedBy('w', 'u', camos, indexProgress([row('k', 10, true)])).map((c) => c.id)).toEqual(['g', 'd']);
+  });
+
+  it('nada enquanto faltar outro camo normal, e ignora mastery já feitos', () => {
+    expect(masteryUnlockedBy('w', 'u', camos, indexProgress([]))).toEqual([]);
+    expect(
+      masteryUnlockedBy('w', 'u', camos, indexProgress([row('k', 10, true), row('g', 0, true)])).map((c) => c.id),
+    ).toEqual(['d']);
   });
 });

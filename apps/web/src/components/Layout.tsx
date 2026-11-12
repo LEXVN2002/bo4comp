@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from 'react-router';
 import { useAuth } from '../features/auth/AuthProvider';
+import { ClassSealWatcher } from '../features/camos/ClassSeals';
 import { UnlockAnimationsProvider } from '../features/unlocks/UnlockAnimations';
 
 const NAV = [
@@ -52,6 +53,7 @@ export function Layout() {
       </header>
       <main className="mx-auto max-w-6xl px-4 py-6">
         <UnlockAnimationsProvider>
+          <ClassSealWatcher />
           <Outlet />
         </UnlockAnimationsProvider>
       </main>

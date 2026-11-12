@@ -158,6 +158,23 @@ export function isMasteryLocked(
   );
 }
 
+/**
+ * Camos de mastery que o servidor (unlock_mastery_camos) vai desbloquear em cadeia
+ * quando `camoId` ficar concluído nesta arma: todos os de prereq_all ainda por fazer,
+ * se todos os outros camos da arma ficarem concluídos. Por ordem de tier.
+ */
+export function masteryUnlockedBy<C extends CamoLike>(
+  weaponId: string,
+  camoId: string,
+  camos: readonly C[],
+  index: ProgressIndex,
+): C[] {
+  const isDone = (c: CamoLike) => c.id === camoId || index.get(progressKey(weaponId, c.id))?.unlocked_at != null;
+  const others = camos.filter((c) => c.requirement_type !== 'prereq_all');
+  if (others.length === 0 || !others.every(isDone)) return [];
+  return sortByTier(camos.filter((c) => c.requirement_type === 'prereq_all' && !isDone(c)));
+}
+
 export type CamoDisplayState = 'locked' | 'in_progress' | 'done';
 
 /** Estado visual de um camo na grelha: bloqueado, em progresso ou concluído. */

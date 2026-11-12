@@ -2,6 +2,7 @@ import { useMemo, type ReactNode } from 'react';
 import { Link } from 'react-router';
 import { ProgressBar } from '../components/ProgressBar';
 import { ErrorMessage, Loading } from '../components/QueryState';
+import { ClassSeals } from '../features/camos/ClassSeals';
 import { ClosestToUnlock } from '../features/camos/ClosestToUnlock';
 import { PinnedWeapons } from '../features/camos/PinnedWeapons';
 import { useCamoProgress } from '../features/camos/queries';
@@ -71,6 +72,13 @@ export default function Dashboard() {
           <ProgressBar value={mainEggs.length ? mainDone / mainEggs.length : 0} label="Easter eggs principais concluídos" />
         </StatCard>
       </div>
+
+      <section aria-labelledby="seals" className="space-y-2">
+        <h2 id="seals" className="text-sm font-medium text-zinc-400">
+          Selos de classe
+        </h2>
+        <ClassSeals data={camoData.data} />
+      </section>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <section aria-labelledby="closest" className="space-y-2">
