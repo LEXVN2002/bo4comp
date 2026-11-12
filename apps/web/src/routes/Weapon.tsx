@@ -71,6 +71,10 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
   const summary = weaponSummary(weapon.id, camos, data.index);
   const selectedCamo = camos[selected];
 
+  // Último valor pedido por camo, ainda por confirmar. A cache do TanStack Query só recebe
+  // o valor otimista depois de um await, por isso toques muito rápidos leriam o valor antigo.
+  const pendingCounts = useRef(new Map<string, number>());
+
   const setCount = useCallback(
     (camo: CamoRow, count: number) => {
       const row = data.index.get(progressKey(weapon.id, camo.id));
@@ -79,15 +83,32 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
       const reached =
         isCountedRequirement(camo.requirement_type) && camo.requirement_value !== null && count >= camo.requirement_value;
       if (reached && !state.unlocked) setUnlockedFlash(camo.name);
-      save.mutate({
-        weaponId: weapon.id,
-        camoId: camo.id,
-        currentCount: count,
-        unlocked: state.unlocked || reached,
-        previousUnlockedAt: row?.unlocked_at ?? null,
-      });
+      pendingCounts.current.set(camo.id, count);
+      save.mutate(
+        {
+          weaponId: weapon.id,
+          camoId: camo.id,
+          currentCount: count,
+          unlocked: state.unlocked || reached,
+          previousUnlockedAt: row?.unlocked_at ?? null,
+        },
+        {
+          onSettled: () => {
+            if (pendingCounts.current.get(camo.id) === count) pendingCounts.current.delete(camo.id);
+          },
+        },
+      );
     },
     [data.index, save, weapon.id],
+  );
+
+  const changeCountBy = useCallback(
+    (camo: CamoRow, delta: number) => {
+      const current =
+        pendingCounts.current.get(camo.id) ?? data.index.get(progressKey(weapon.id, camo.id))?.current_count ?? 0;
+      setCount(camo, Math.max(current + delta, 0));
+    },
+    [data.index, setCount, weapon.id],
   );
 
   const toggleDone = useCallback(
@@ -148,10 +169,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
           setPanelOpen((open) => !open);
           break;
         case 'count':
-          if (camo && camo.requirement_type !== 'prereq_all') {
-            const count = data.index.get(progressKey(weapon.id, camo.id))?.current_count ?? 0;
-            setCount(camo, Math.max(count + action.delta, 0));
-          }
+          if (camo && camo.requirement_type !== 'prereq_all') changeCountBy(camo, action.delta);
           break;
         case 'toggle-done':
           if (camo) toggleDone(camo);
@@ -173,7 +191,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [camos, data.index, panelOpen, pinned, selected, setCount, toggleDone, togglePin, weapon.id]);
+  }, [camos, changeCountBy, panelOpen, pinned, selected, toggleDone, togglePin, weapon.id]);
 
   const timeline = camos
     .map((camo) => ({ camo, at: data.index.get(progressKey(weapon.id, camo.id))?.unlocked_at ?? null }))
@@ -316,6 +334,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
           note={notes.data ? (notes.data.find((n) => n.camo_id === selectedCamo.id)?.body ?? '') : null}
           onSaveNote={(body) => saveNote.mutateAsync({ camoId: selectedCamo.id, body })}
           onSetCount={(count) => setCount(selectedCamo, count)}
+          onChangeCountBy={(delta) => changeCountBy(selectedCamo, delta)}
           onToggleDone={() => toggleDone(selectedCamo)}
           onClose={() => {
             setPanelOpen(false);

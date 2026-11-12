@@ -21,6 +21,8 @@ interface Props {
   note: string | null;
   onSaveNote: (body: string) => Promise<unknown>;
   onSetCount: (count: number) => void;
+  /** Botões −1/+1/+10: relativo ao último valor pedido (seguro com toques rápidos). */
+  onChangeCountBy: (delta: number) => void;
   onToggleDone: () => void;
   onClose: () => void;
   saveError: unknown;
@@ -126,6 +128,7 @@ function Counter({
   target,
   counted,
   onSetCount,
+  onChangeCountBy,
 }: Props & { count: number; target: number | null; counted: boolean }) {
   const [draft, setDraft] = useState(String(count));
   // Mantém o campo em sincronia com os botões e os atalhos (ajuste durante o render,
@@ -158,13 +161,13 @@ function Counter({
       </p>
       {target !== null && <ProgressBar value={Math.min(count / target, 1)} label={`Progresso de ${camo.name}`} />}
       <form onSubmit={commitDraft} className="flex flex-wrap items-center gap-2">
-        <button type="button" onClick={() => onSetCount(Math.max(count - 1, 0))} className="btn-secondary px-3">
+        <button type="button" onClick={() => onChangeCountBy(-1)} className="btn-secondary px-3">
           −1
         </button>
-        <button type="button" onClick={() => onSetCount(count + 1)} className="btn-secondary px-3">
+        <button type="button" onClick={() => onChangeCountBy(1)} className="btn-secondary px-3">
           +1
         </button>
-        <button type="button" onClick={() => onSetCount(count + 10)} className="btn-secondary px-3">
+        <button type="button" onClick={() => onChangeCountBy(10)} className="btn-secondary px-3">
           +10
         </button>
         <label className="ml-auto flex items-center gap-2 text-sm text-zinc-400">

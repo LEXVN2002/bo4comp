@@ -36,6 +36,9 @@ export function useSaveCamoProgress() {
 
   return useMutation({
     mutationKey: saveCamoProgressKey,
+    // Em fila: cada pedido grava um valor absoluto, por isso têm de chegar ao servidor pela
+    // ordem dos toques (em paralelo, um pedido antigo podia chegar depois e ganhar).
+    scope: { id: 'save-camo-progress' },
     mutationFn: async (input: SaveCamoProgressInput) => {
       const supabase = getSupabase();
       const unlockedAt = input.unlocked ? (input.previousUnlockedAt ?? new Date().toISOString()) : null;

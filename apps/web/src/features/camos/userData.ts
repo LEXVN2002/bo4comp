@@ -85,7 +85,10 @@ export function useTogglePin() {
         if (error) throw error;
         return;
       }
-      const rows = queryClient.getQueryData<PinnedWeaponRow[]>(pinnedKey) ?? [];
+      // A cache já tem a linha otimista desta arma (onMutate corre antes): ignorá-la.
+      const rows = (queryClient.getQueryData<PinnedWeaponRow[]>(pinnedKey) ?? []).filter(
+        (r) => r.weapon_id !== weaponId,
+      );
       const sortOrder = rows.reduce((max, r) => Math.max(max, r.sort_order + 1), 0);
       const { error } = await supabase
         .from('pinned_weapons')
