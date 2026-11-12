@@ -1,0 +1,29 @@
+# Deploy da app web (Fase 1). Corre a partir da raiz do monorepo.
+[build]
+  # `pnpm build` valida o game-data com Zod (falha se um JSON for inválido) e faz o build da app.
+  command = "pnpm build"
+  publish = "apps/web/dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  # VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY definem-se na UI do Netlify
+  # (Site configuration → Environment variables). Nunca a service_role key.
+
+# SPA: todas as rotas servem o index.html (React Router trata do resto).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

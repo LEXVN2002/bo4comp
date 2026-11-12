@@ -26,7 +26,8 @@ pnpm dev                      # app web em http://localhost:5173
 | `pnpm lint`    | ESLint + typecheck de todos os pacotes                          |
 | `pnpm seed`    | Valida `packages/game-data` com Zod e gera `supabase/seed.sql`  |
 | `pnpm build`   | Valida game-data e faz build da app                             |
-| `pnpm db:test` | Testes pgTAP de RLS e de `record_session` (`supabase/tests`)    |
+| `pnpm db:test` | Testes pgTAP (RLS, sessões, export/import) em `supabase/tests`  |
+| `pnpm db:types`| Gera `apps/web/src/lib/database.types.ts` a partir da BD local  |
 
 ## Dados do jogo
 
@@ -35,3 +36,36 @@ correr `pnpm seed` e `pnpm db:reset`. Requisitos desconhecidos ficam `null` com
 `verified: false` (`requirement_type: "unknown"` quando nem o tipo é conhecido).
 O id de cada passo de easter egg é `<easter-egg-id>-<ordem>`: reordenar passos muda os ids,
 e passos removidos do JSON são apagados (com o progresso respetivo) no próximo seed.
+
+## Deploy (Supabase cloud + Netlify)
+
+Uso pessoal: a app não é um serviço público (ver "Regras e limites" na spec).
+
+### 1. Supabase cloud
+
+1. Criar um projeto em <https://supabase.com/dashboard> (região perto de ti, ex.: `eu-west`).
+2. Ligar o projeto local e aplicar migrações + catálogo:
+
+   ```sh
+   pnpm exec supabase login
+   pnpm exec supabase link --project-ref <project-ref>
+   pnpm exec supabase db push --include-seed
+   ```
+
+   Para atualizar o catálogo mais tarde: `pnpm seed` e voltar a correr `db push --include-seed`
+   (o seed é idempotente).
+3. Em **Authentication → URL Configuration**: *Site URL* = URL do Netlify
+   (ex.: `https://<site>.netlify.app`) e acrescentar o mesmo URL às *Redirect URLs*.
+4. Em **Authentication → Providers → Email**: deixar só o login por email (magic link).
+   Opcional mas recomendado para uso pessoal: desativar *Allow new users to sign up* depois
+   de criares a tua conta.
+5. Copiar de **Project Settings → API** o *Project URL* e a chave *anon*/*publishable*.
+   **Nunca** usar a `service_role`/`secret` key na app.
+
+### 2. Netlify
+
+1. Pôr o repositório num remote Git (ex.: GitHub) e, no Netlify, *Add new site → Import an existing
+   project*. O `netlify.toml` já define o build (`pnpm build`) e a pasta publicada (`apps/web/dist`).
+2. Em **Site configuration → Environment variables**: `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`
+   com os valores do passo 1.5.
+3. Fazer deploy e testar: entrar por magic link, registar uma sessão, exportar o progresso.

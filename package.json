@@ -2,6 +2,7 @@
   "name": "bo4-zombies-companion",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@12.18.0",
   "engines": {
     "node": ">=20"
   },
