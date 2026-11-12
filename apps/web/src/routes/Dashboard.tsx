@@ -2,7 +2,10 @@ import { useMemo, type ReactNode } from 'react';
 import { Link } from 'react-router';
 import { ProgressBar } from '../components/ProgressBar';
 import { ErrorMessage, Loading } from '../components/QueryState';
+import { ClosestToUnlock } from '../features/camos/ClosestToUnlock';
+import { PinnedWeapons } from '../features/camos/PinnedWeapons';
 import { useCamoProgress } from '../features/camos/queries';
+import { useCamoData } from '../features/camos/useCamoData';
 import { useCatalog } from '../features/catalog/queries';
 import { useBestRounds, useRecentSessions } from '../features/dashboard/queries';
 import { useCompletions, useEasterEggs } from '../features/easter-eggs/queries';
@@ -18,6 +21,7 @@ export default function Dashboard() {
   const completions = useCompletions();
   const bestRounds = useBestRounds();
   const recent = useRecentSessions(5);
+  const camoData = useCamoData();
 
   const index = useMemo(() => indexProgress(progress.data ?? []), [progress.data]);
 
@@ -25,6 +29,8 @@ export default function Dashboard() {
   if (queries.some((q) => q.isPending)) return <Loading />;
   const failed = queries.find((q) => q.isError);
   if (failed) return <ErrorMessage error={failed.error} onRetry={() => failed.refetch()} />;
+  if (camoData.isPending) return <Loading />;
+  if (camoData.error || !camoData.data) return <ErrorMessage error={camoData.error} onRetry={camoData.retry} />;
 
   const maps = catalog.data?.maps ?? [];
   const weapons = catalog.data?.weapons ?? [];
@@ -64,6 +70,29 @@ export default function Dashboard() {
         >
           <ProgressBar value={mainEggs.length ? mainDone / mainEggs.length : 0} label="Easter eggs principais concluídos" />
         </StatCard>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <section aria-labelledby="closest" className="space-y-2">
+          <h2 id="closest" className="text-sm font-medium text-zinc-400">
+            Mais perto de desbloquear
+          </h2>
+          <ClosestToUnlock data={camoData.data} />
+        </section>
+
+        {camoData.data.pinned.length > 0 && (
+          <section aria-labelledby="pinned" className="space-y-2">
+            <div className="flex items-baseline justify-between">
+              <h2 id="pinned" className="text-sm font-medium text-zinc-400">
+                Armas afixadas
+              </h2>
+              <Link to="/camos" className="text-xs text-zinc-400 hover:text-emerald-400">
+                Ver camos
+              </Link>
+            </div>
+            <PinnedWeapons data={camoData.data} compact />
+          </section>
+        )}
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">

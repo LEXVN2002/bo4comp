@@ -2,7 +2,13 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { ProgressBar } from '../../components/ProgressBar';
 import { UnverifiedBadge } from '../../components/UnverifiedBadge';
 import { describeError } from '../../lib/errors';
-import { camoState, type CamoDisplayState, type CamoOverrideLike } from '../../lib/progress';
+import {
+  camoState,
+  ESTIMATE_MIN_SESSIONS,
+  type CamoDisplayState,
+  type CamoOverrideLike,
+  type MatchEstimate,
+} from '../../lib/progress';
 import type { CamoRow, WeaponRow } from '../catalog/queries';
 import { NotesField } from './CamoBits';
 import type { CamoProgressRow } from './queries';
@@ -26,6 +32,8 @@ interface Props {
   onToggleDone: () => void;
   onClose: () => void;
   saveError: unknown;
+  /** Estimativa de partidas; null quando não se aplica (concluído, mastery ou requisito por confirmar). */
+  estimate: MatchEstimate | 'loading' | null;
 }
 
 /** Painel de um camo: lateral no desktop, de baixo no telemóvel. Não é modal (os atalhos continuam). */
@@ -79,6 +87,8 @@ export function CamoPanel(props: Props) {
 
         {!isMastery && <Counter {...props} count={state.count} target={state.target} counted={state.counted} />}
 
+        {props.estimate !== null && <EstimateLine estimate={props.estimate} unit={camo.requirement_type} />}
+
         <label className="flex cursor-pointer items-center gap-3 text-sm">
           <input
             type="checkbox"
@@ -120,6 +130,24 @@ export function CamoPanel(props: Props) {
       </div>
     </aside>
   );
+}
+
+function EstimateLine({ estimate, unit }: { estimate: MatchEstimate | 'loading'; unit: string }) {
+  let text: string;
+  if (estimate === 'loading') text = 'A calcular estimativa…';
+  else if (estimate.kind === 'insufficient')
+    text = `Estimativa: dados insuficientes (menos de ${ESTIMATE_MIN_SESSIONS} sessões com esta arma).`;
+  else if (estimate.kind === 'no_progress')
+    text = `Estimativa: sem ${unit === 'headshots' ? 'headshots' : 'kills'} com esta arma nas últimas sessões.`;
+  else {
+    const avg = estimate.average.toLocaleString('pt-PT', { maximumFractionDigits: 1 });
+    const unitLabel = unit === 'headshots' ? 'headshots' : 'kills';
+    text =
+      estimate.matches === 1
+        ? `Estimativa: cerca de 1 partida (média de ${avg} ${unitLabel} por sessão).`
+        : `Estimativa: cerca de ${estimate.matches} partidas (média de ${avg} ${unitLabel} por sessão).`;
+  }
+  return <p className="text-sm text-zinc-400">{text}</p>;
 }
 
 function Counter({

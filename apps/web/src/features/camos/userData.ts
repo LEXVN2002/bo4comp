@@ -2,6 +2,7 @@
 // Tudo protegido por RLS (user_id = auth.uid()); o user_id é preenchido pelo default da coluna.
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { Tables } from '../../lib/database.types';
+import { ESTIMATE_WINDOW, type WeaponSessionStats } from '../../lib/progress';
 import { getSupabase } from '../../lib/supabase';
 
 export type CamoOverrideRow = Tables<'user_camo_overrides'>;
@@ -113,6 +114,66 @@ export function useTogglePin() {
       if (context?.previous) queryClient.setQueryData(pinnedKey, context.previous);
     },
     onSettled: () => queryClient.invalidateQueries({ queryKey: pinnedKey }),
+  });
+}
+
+/** Grava a nova ordem das armas afixadas (sort_order = posição), com update otimista. */
+export function useReorderPinned() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    // Em fila: dois arrastos seguidos têm de chegar pela ordem certa.
+    scope: { id: 'reorder-pinned' },
+    mutationFn: async (weaponIds: string[]) => {
+      const { error } = await getSupabase()
+        .from('pinned_weapons')
+        .upsert(
+          weaponIds.map((weapon_id, sort_order) => ({ weapon_id, sort_order })),
+          { onConflict: 'user_id,weapon_id' },
+        );
+      if (error) throw error;
+    },
+    onMutate: async (weaponIds) => {
+      await queryClient.cancelQueries({ queryKey: pinnedKey });
+      const previous = queryClient.getQueryData<PinnedWeaponRow[]>(pinnedKey);
+      queryClient.setQueryData<PinnedWeaponRow[]>(pinnedKey, (rows = []) => {
+        const byId = new Map(rows.map((r) => [r.weapon_id, r]));
+        return weaponIds
+          .map((id, sort_order) => {
+            const row = byId.get(id);
+            return row ? { ...row, sort_order } : undefined;
+          })
+          .filter((r): r is PinnedWeaponRow => r !== undefined);
+      });
+      return { previous };
+    },
+    onError: (_error, _input, context) => {
+      if (context?.previous) queryClient.setQueryData(pinnedKey, context.previous);
+    },
+    onSettled: () => queryClient.invalidateQueries({ queryKey: pinnedKey }),
+  });
+}
+
+// ---------- Estimativas ----------
+
+/**
+ * Kills e headshots da arma nas últimas 10 sessões terminadas em que foi usada
+ * (a mais recente primeiro). Sessões ao vivo não contam.
+ */
+export function useWeaponRecentStats(weaponId: string) {
+  return useQuery({
+    // Debaixo de 'sessions': gravar, editar ou apagar sessões invalida isto também.
+    queryKey: ['sessions', 'weapon-recent-stats', weaponId],
+    queryFn: async (): Promise<WeaponSessionStats[]> => {
+      const { data, error } = await getSupabase()
+        .from('sessions')
+        .select('played_at, session_weapon_stats!inner(kills, headshots)')
+        .eq('status', 'done')
+        .eq('session_weapon_stats.weapon_id', weaponId)
+        .order('played_at', { ascending: false })
+        .limit(ESTIMATE_WINDOW);
+      if (error) throw error;
+      return data.flatMap((s) => s.session_weapon_stats.map((w) => ({ kills: w.kills, headshots: w.headshots })));
+    },
   });
 }
 

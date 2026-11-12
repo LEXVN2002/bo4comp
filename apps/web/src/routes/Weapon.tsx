@@ -14,6 +14,7 @@ import {
   useSaveWeaponNote,
   useTogglePin,
   useWeaponNote,
+  useWeaponRecentStats,
 } from '../features/camos/userData';
 import type { CamoRow, WeaponRow } from '../features/catalog/queries';
 import { formatDateTime } from '../lib/format';
@@ -21,6 +22,7 @@ import { weaponClassLabel } from '../lib/labels';
 import {
   camoDisplayState,
   camoState,
+  estimateMatches,
   formatPercent,
   isCountedRequirement,
   progressKey,
@@ -59,6 +61,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
   const saveNote = useSaveCamoNote(weapon.id);
   const weaponNote = useWeaponNote(weapon.id);
   const saveWeaponNote = useSaveWeaponNote(weapon.id);
+  const recentStats = useWeaponRecentStats(weapon.id);
 
   const [selected, setSelected] = useState(0);
   const [panelOpen, setPanelOpen] = useState(false);
@@ -199,6 +202,14 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
     .sort((a, b) => Date.parse(b.at) - Date.parse(a.at));
 
   const fraction = summary.total ? summary.unlocked / summary.total : 0;
+
+  function panelEstimate(camo: CamoRow) {
+    const state = camoState(camo, data.index.get(progressKey(weapon.id, camo.id)));
+    if (state.unlocked || state.target === null) return null;
+    if (camo.requirement_type !== 'kills' && camo.requirement_type !== 'headshots') return null;
+    if (!recentStats.data) return recentStats.isError ? null : 'loading';
+    return estimateMatches(state.target - state.count, camo.requirement_type, recentStats.data);
+  }
 
   return (
     <section className={`space-y-6 ${panelOpen ? 'pb-[60vh] lg:pr-[24rem] lg:pb-0' : ''}`}>
@@ -341,6 +352,7 @@ function WeaponScreen({ weapon, data }: { weapon: WeaponRow; data: CamoData }) {
             tileRefs.current[selected]?.focus();
           }}
           saveError={save.error}
+          estimate={panelEstimate(selectedCamo)}
         />
       )}
 

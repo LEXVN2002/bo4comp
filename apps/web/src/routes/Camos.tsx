@@ -13,6 +13,7 @@ import {
   type WeaponListItem,
   type WeaponSort,
 } from '../features/camos/listFilters';
+import { PinnedWeapons } from '../features/camos/PinnedWeapons';
 import { useCamoData } from '../features/camos/useCamoData';
 import { useTogglePin } from '../features/camos/userData';
 import { weaponClassesOf } from '../features/camos/weapons';
@@ -71,6 +72,13 @@ export default function Camos() {
           </Link>
         </div>
       </header>
+
+      <section aria-labelledby="pinned-title" className="space-y-2">
+        <h2 id="pinned-title" className="text-sm font-medium tracking-wide text-zinc-400 uppercase">
+          Armas afixadas
+        </h2>
+        <PinnedWeapons data={data} />
+      </section>
 
       <div className="space-y-3">
         <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1" role="group" aria-label="Filtrar por classe">
